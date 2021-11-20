@@ -100,14 +100,14 @@ public:
 };
 
 vector<Goods*>v;
-// Большая проверка на тип файла
+// Р‘РѕР»СЊС€Р°СЏ РїСЂРѕРІРµСЂРєР° РЅР° С‚РёРї С„Р°Р№Р»Р°
 void bigIF(wstring type, int amount) {
-    if(type == L"футболка") { v.push_back(new TShirt(amount, type)); return; }
-    if(type == L"бейсболка") { v.push_back(new Cap(amount, type)); return; }
-    if(type == L"мяч") { v.push_back(new Ball(amount, type)); return; }
-    if(type == L"рюкзак") { v.push_back(new Backpack(amount, type)); return; }
-    if(type == L"кеды") { v.push_back(new Boots(amount, type)); return; }
-    if(type == L"велосипед") { v.push_back(new Byke(amount, type)); return; }
+    if(type == L"С„СѓС‚Р±РѕР»РєР°") { v.push_back(new TShirt(amount, type)); return; }
+    if(type == L"Р±РµР№СЃР±РѕР»РєР°") { v.push_back(new Cap(amount, type)); return; }
+    if(type == L"РјСЏС‡") { v.push_back(new Ball(amount, type)); return; }
+    if(type == L"СЂСЋРєР·Р°Рє") { v.push_back(new Backpack(amount, type)); return; }
+    if(type == L"РєРµРґС‹") { v.push_back(new Boots(amount, type)); return; }
+    if(type == L"РІРµР»РѕСЃРёРїРµРґ") { v.push_back(new Byke(amount, type)); return; }
 }
 
 int main() {
@@ -117,11 +117,11 @@ int main() {
     multimap<set<int>, wstring>list;
     wstring type;
     int amount;
-    // Чтение файла и заполение вектора
+    // Р§С‚РµРЅРёРµ С„Р°Р№Р»Р° Рё Р·Р°РїРѕР»РµРЅРёРµ РІРµРєС‚РѕСЂР°
     wifstream input;
-    input.open(L"Товары.txt");
+    input.open(L"РўРѕРІР°СЂС‹.txt");
     input.imbue(utf8_locale);
-    if(!input) { wcout << L"Can't open file \"Товары.txt\""; return 0; }
+    if(!input) { wcout << L"Can't open file \"РўРѕРІР°СЂС‹.txt\""; return 0; }
     else {
         while(!input.eof()) {
             input >> type;
@@ -130,13 +130,13 @@ int main() {
         }
     }
     input.close();
-    // Заполнение multimap
+    // Р—Р°РїРѕР»РЅРµРЅРёРµ multimap
     for(int i = 0; i < v.size(); i++) {
-        set<int>inside; // Создание контейнера set
-        inside.insert(v[i]->GetAmount()); // Положили в set количество товара
-        list.emplace(inside, v[i]->GetName()); // Создаем элемент контейнера multimap
+        set<int>inside; // РЎРѕР·РґР°РЅРёРµ РєРѕРЅС‚РµР№РЅРµСЂР° set
+        inside.insert(v[i]->GetAmount()); // РџРѕР»РѕР¶РёР»Рё РІ set РєРѕР»РёС‡РµСЃС‚РІРѕ С‚РѕРІР°СЂР°
+        list.emplace(inside, v[i]->GetName()); // РЎРѕР·РґР°РµРј СЌР»РµРјРµРЅС‚ РєРѕРЅС‚РµР№РЅРµСЂР° multimap
     }
-    // Вывод mutimap
+    // Р’С‹РІРѕРґ mutimap
     for(multimap<set<int>, wstring>::iterator i = list.begin(); i != list.end(); ++i) {
         wcout << i->second << ": ";
         auto num = (i->first);
