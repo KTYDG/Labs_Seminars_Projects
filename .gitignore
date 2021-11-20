@@ -6,5 +6,5 @@
 *.obj
 *.db-wal
 *.db-wal
-.vs/
+OOP Lab 7\.vs\
 CMakeSettings.json
