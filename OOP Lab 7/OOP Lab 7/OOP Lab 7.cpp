@@ -136,6 +136,14 @@ int main() {
         inside.insert(v[i]->GetAmount()); // Положили в set количество товара
         list.emplace(inside, v[i]->GetName()); // Создаем элемент контейнера multimap
     }
+    for(multimap<set<int>, wstring>::iterator i = list.begin(); i != list.end(); ++i) {
+        wcout << i->second << ": ";
+        auto num = (i->first);
+        for(auto& n : num) {
+            cout << n << endl;
+        }
+    }
+
 
     for(int i = 0; i < v.size(); i++) {
         delete v[i];
