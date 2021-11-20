@@ -11,7 +11,7 @@ int main() {
     DB<Molokanov*> db1;
     DB<Molokanov*> db2;
     srand(time(0));
-    // Случайное заполение вектора
+    // РЎР»СѓС‡Р°Р№РЅРѕРµ Р·Р°РїРѕР»РµРЅРёРµ РІРµРєС‚РѕСЂР°
     for(int i = 0; i < 6; i++) {
         if(rand() % 2 == 0) {
             db1.Add(new Molokanov);
@@ -24,6 +24,6 @@ int main() {
     DB<Molokanov*> db3(db2);
     db3.EErase();
     wcout << db3;
-    db3.Output(); // Заодно вывод в файл
+    db3.Output(); // Р—Р°РѕРґРЅРѕ РІС‹РІРѕРґ РІ С„Р°Р№Р»
     return 0;
 }
