@@ -1,4 +1,4 @@
-#include <cmath>
+п»ї#include <cmath>
 #include <iostream>
 #include <vector>
 #include <list>
@@ -10,7 +10,7 @@ using namespace std;
 using namespace concurrency;
 
 mutex mp;
-int N = 40000/*строки*/, M = 40000/*столбцы*/;
+int N = 40000/*СЃС‚СЂРѕРєРё*/, M = 40000/*СЃС‚РѕР»Р±С†С‹*/;
 long double mp2 = 1, mp1 = 1, Q = 13.0;
 int i, j;
 
@@ -34,24 +34,24 @@ int main() {
 	
 	cout << N << "x" << M << "\n";
 
-	/// Матрица векторов
+	/// РњР°С‚СЂРёС†Р° РІРµРєС‚РѕСЂРѕРІ
 	vector<vector<long double>>b(N, vector<long double>(M));
 
-	/// Матрица
+	/// РњР°С‚СЂРёС†Р°
 	//long double** Matrix = new long double*[N];
 	//for(int i = 0; i < N; i++) {
 	//	Matrix[i] = new long double[M];
 	//}
-	/// Линейный лист
+	/// Р›РёРЅРµР№РЅС‹Р№ Р»РёСЃС‚
 	list<long double> test;
 
-	/// Создание матрицы векторов
+	/// РЎРѕР·РґР°РЅРёРµ РјР°С‚СЂРёС†С‹ РІРµРєС‚РѕСЂРѕРІ
 	//for (i = 0; i < N; i++) {
 	//	for (j = 0; j < M; j++) {
 	//		b[i][j] = (long double)pow((static_cast<unsigned __int64>(j) + 1) / Q, 3);
 	//	}
 	//}
-	/// Создание матрицы
+	/// РЎРѕР·РґР°РЅРёРµ РјР°С‚СЂРёС†С‹
 	//for(i = 0; i < N; i++) {
 	//	for(j = 0; j < M; j++) {
 	//		Matrix[i][j] = (long double)pow((static_cast<unsigned __int64>(j) + 1) / Q, 3);
@@ -172,7 +172,7 @@ int main() {
 
 	sw::Stopwatch my_watch1;
 	my_watch1.start();
-	/// Рабочий(да) мусор
+	/// Р Р°Р±РѕС‡РёР№(РґР°) РјСѓСЃРѕСЂ
 	parallel_for_each((size_t)0, (size_t)N, 
 		[&](size_t i) {
 			mp1 = 1;
@@ -201,7 +201,7 @@ int main() {
 
 	//sw::Stopwatch my_watch;
 	//my_watch.start();
-	///// Обычная матрица
+	///// РћР±С‹С‡РЅР°СЏ РјР°С‚СЂРёС†Р°
 	//for (i = 0; i < N; i++) {
 	//	mp1 = 1;
 	//	for (j = 0; j < M; j++) {
@@ -220,8 +220,8 @@ int main() {
 
 	//sw::Stopwatch my_watch2;
 	//my_watch2.start();
-	///// Самый быстрый вариант
-	///// Создание линейного листа
+	///// РЎР°РјС‹Р№ Р±С‹СЃС‚СЂС‹Р№ РІР°СЂРёР°РЅС‚
+	///// РЎРѕР·РґР°РЅРёРµ Р»РёРЅРµР№РЅРѕРіРѕ Р»РёСЃС‚Р°
 	//for(j = 0; j < M; j++) {
 	//	test.push_back((long double)pow((static_cast<unsigned __int64>(j) + 1) / Q, 3));
 	//}
