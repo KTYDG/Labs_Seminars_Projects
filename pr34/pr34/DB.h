@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Danila.h"
 #include <typeinfo>
 #include <algorithm>	

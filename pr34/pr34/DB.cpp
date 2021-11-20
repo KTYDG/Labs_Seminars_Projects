@@ -1,15 +1,15 @@
-#include "DB.h"
+п»ї#include "DB.h"
 
 template<class T>
 DB<T>::DB() {}
-// Конструктор копирования
+// РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ РєРѕРїРёСЂРѕРІР°РЅРёСЏ
 template<class T>
 DB<T>::DB(const DB& clone) {
 	for(typename vector<T>::const_iterator i = clone.begin(); i != clone.end(); ++i) {
 		(*i)->Clone(*this);
 	}
 }
-// Оператор присваивания копированием
+// РћРїРµСЂР°С‚РѕСЂ РїСЂРёСЃРІР°РёРІР°РЅРёСЏ РєРѕРїРёСЂРѕРІР°РЅРёРµРј 
 template<class T>
 DB<T>& DB<T>::operator=(const DB& clone) {
 	if(this != &clone) {
@@ -23,31 +23,31 @@ DB<T>& DB<T>::operator=(const DB& clone) {
 	}
 	return *this;
 }
-// Добавление в вектор
+// Р”РѕР±Р°РІР»РµРЅРёРµ РІ РІРµРєС‚РѕСЂ
 template<class T>
 void DB<T>::Add(T t) {
 	typename vector<T>::push_back(t);
 }
-// Удаление до 2 уникальных элементов
+// РЈРґР°Р»РµРЅРёРµ РґРѕ 2 СѓРЅРёРєР°Р»СЊРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 template<class T>
 void DB<T>::EErase() {
-	// Сортировка, чтобы нормально провести сравнение с помощью юник
+	// РЎРѕСЂС‚РёСЂРѕРІРєР°, С‡С‚РѕР±С‹ РЅРѕСЂРјР°Р»СЊРЅРѕ РїСЂРѕРІРµСЃС‚Рё СЃСЂР°РІРЅРµРЅРёРµ СЃ РїРѕРјРѕС‰СЊСЋ СЋРЅРёРє
 	sort(this->begin(), this->end());
-	//Юник сравнивает два соседних элемента и он удаляется с помощью erase, если повтор
+	//Р®РЅРёРє СЃСЂР°РІРЅРёРІР°РµС‚ РґРІР° СЃРѕСЃРµРґРЅРёС… СЌР»РµРјРµРЅС‚Р° Рё РѕРЅ СѓРґР°Р»СЏРµС‚СЃСЏ СЃ РїРѕРјРѕС‰СЊСЋ erase, РµСЃР»Рё РїРѕРІС‚РѕСЂ
 	this->erase(unique(this->begin(), this->end(), comp<Molokanov*>), this->end());
-	// Смена мест, сортировка ставить конец басни в начало, надо вернуть ее назад
+	// РЎРјРµРЅР° РјРµСЃС‚, СЃРѕСЂС‚РёСЂРѕРІРєР° СЃС‚Р°РІРёС‚СЊ РєРѕРЅРµС† Р±Р°СЃРЅРё РІ РЅР°С‡Р°Р»Рѕ, РЅР°РґРѕ РІРµСЂРЅСѓС‚СЊ РµРµ РЅР°Р·Р°Рґ
 	swap(*(this->begin()), *(this->end()-1));
 }
-// Вывод в файл
+// Р’С‹РІРѕРґ РІ С„Р°Р№Р»
 template<class T>
 void DB<T>::Output() {
 	const locale utf8_locale = locale(locale(), new codecvt_utf8<wchar_t>());
 
 	wofstream output;
-	output.open(L"Новый муравей.txt");
+	output.open(L"РќРѕРІС‹Р№ РјСѓСЂР°РІРµР№.txt");
 	output.imbue(utf8_locale);
 
-	if(!output) { wcout << L"Can't open file \"Новый муравей.txt\""; }
+	if(!output) { wcout << L"Can't open file \"РќРѕРІС‹Р№ РјСѓСЂР°РІРµР№.txt\""; }
 	else {
 		for(typename vector<T>::iterator i = this->begin(); i != this->end(); ++i) {
 			output << (*i)->Get();
@@ -58,7 +58,7 @@ void DB<T>::Output() {
 
 template<class T>
 DB<T>::~DB() {
-	// второй вариант обозначить begin и end
+	// РІС‚РѕСЂРѕР№ РІР°СЂРёР°РЅС‚ РѕР±РѕР·РЅР°С‡РёС‚СЊ begin Рё end
 	for(typename vector<T>::iterator i = typename vector<T>::begin(); i != typename vector<T>::end(); ++i) { 
 		delete (*i);
 	}
@@ -70,42 +70,42 @@ template class DB<Molokanov*>;
 
 //Danila* compare;
 /*wstring compare;*/
-// Флаги, которые станут 1, если элемент класса найден
+// Р¤Р»Р°РіРё, РєРѕС‚РѕСЂС‹Рµ СЃС‚Р°РЅСѓС‚ 1, РµСЃР»Рё СЌР»РµРјРµРЅС‚ РєР»Р°СЃСЃР° РЅР°Р№РґРµРЅ
 //short FDanila = 0, FMolokanov = 0;
 //for(int i = 0; i < this->size(); i++) {
 //	//typename vector<T>::iterator k = (this->begin() + i);
 //	//compare = (*k)->Get();
-//	//// Удаление всего конца, если две части басни уже найдены
+//	//// РЈРґР°Р»РµРЅРёРµ РІСЃРµРіРѕ РєРѕРЅС†Р°, РµСЃР»Рё РґРІРµ С‡Р°СЃС‚Рё Р±Р°СЃРЅРё СѓР¶Рµ РЅР°Р№РґРµРЅС‹
 //	//if(FMolokanov == 1 and FDanila == 1) {
 //	//	this->erase(this->begin() + i, this->end());
 //	//	break;
 //	//}
-//	//// Поиск производного класса
-//	//else if( compare.substr(0, compare.find(L' ')) == L"\"Не" and FDanila == 0) {
+//	//// РџРѕРёСЃРє РїСЂРѕРёР·РІРѕРґРЅРѕРіРѕ РєР»Р°СЃСЃР°
+//	//else if( compare.substr(0, compare.find(L' ')) == L"\"РќРµ" and FDanila == 0) {
 //	//	FDanila = 1;
 //	//	continue;
 //	//}
-//	//// Поиск родительского класса
-//	//else if(compare.substr(0, compare.find(L' ')) == L"Попрыгунья" and FMolokanov == 0) {
+//	//// РџРѕРёСЃРє СЂРѕРґРёС‚РµР»СЊСЃРєРѕРіРѕ РєР»Р°СЃСЃР°
+//	//else if(compare.substr(0, compare.find(L' ')) == L"РџРѕРїСЂС‹РіСѓРЅСЊСЏ" and FMolokanov == 0) {
 //	//	FMolokanov = 1;
 //	//	continue;
 //	//}
 //	
-//	//// Поиск производного класса
+//	//// РџРѕРёСЃРє РїСЂРѕРёР·РІРѕРґРЅРѕРіРѕ РєР»Р°СЃСЃР°
 //	//else if((compare = dynamic_cast<Danila*>(*(this->begin() + i))) and FDanila == 0) {
 //	//	FDanila = 1;
 //	//	continue;
 //	//}
-//	//// динамик каст ужасно работает для определения базового класса, поэтому тайпайди
+//	//// РґРёРЅР°РјРёРє РєР°СЃС‚ СѓР¶Р°СЃРЅРѕ СЂР°Р±РѕС‚Р°РµС‚ РґР»СЏ РѕРїСЂРµРґРµР»РµРЅРёСЏ Р±Р°Р·РѕРІРѕРіРѕ РєР»Р°СЃСЃР°, РїРѕСЌС‚РѕРјСѓ С‚Р°Р№РїР°Р№РґРё
 //	//else if(typeid(**(this->begin() + i)) == typeid(Molokanov) and FMolokanov == 0) {
 //	//	FMolokanov = 1;
 //	//	continue;
 //	//}
-//	// Были ОГРОМНЫЕ утечки от того, что объекты вектора не удалялись, перед тем
-//	// как "стереться", поэтому сначала нужно их удалять
+//	// Р‘С‹Р»Рё РћР“Р РћРњРќР«Р• СѓС‚РµС‡РєРё РѕС‚ С‚РѕРіРѕ, С‡С‚Рѕ РѕР±СЉРµРєС‚С‹ РІРµРєС‚РѕСЂР° РЅРµ СѓРґР°Р»СЏР»РёСЃСЊ, РїРµСЂРµРґ С‚РµРј
+//	// РєР°Рє "СЃС‚РµСЂРµС‚СЊСЃСЏ", РїРѕСЌС‚РѕРјСѓ СЃРЅР°С‡Р°Р»Р° РЅСѓР¶РЅРѕ РёС… СѓРґР°Р»СЏС‚СЊ
 //	delete *(this->begin() + i); 
 //	this->erase(this->begin() + i);
-//	i--; // Если удалили - надо вернуться назад на 1
+//	i--; // Р•СЃР»Рё СѓРґР°Р»РёР»Рё - РЅР°РґРѕ РІРµСЂРЅСѓС‚СЊСЃСЏ РЅР°Р·Р°Рґ РЅР° 1
 //}
 
 
@@ -115,11 +115,11 @@ template class DB<Molokanov*>;
 //	//typename vector<T>::iterator k = this->begin();
 //	//compare = (*k)->Get();
 //	////if(typeid(**(this->begin())) == typeid(Molokanov)) return;
-//	//if(compare.substr(0, compare.find(L' ')) == L"Попрыгунья") return;
+//	//if(compare.substr(0, compare.find(L' ')) == L"РџРѕРїСЂС‹РіСѓРЅСЊСЏ") return;
 //	//else {
 //	//	Molokanov* buffer = *(this->begin());
-//	//	// Изначально конец вектора был записан как end(), но происходило выпадение за пределы вектора
-//	//	// В итоге замененно на begin()+1, скорее всего end()-1 так же работает
+//	//	// РР·РЅР°С‡Р°Р»СЊРЅРѕ РєРѕРЅРµС† РІРµРєС‚РѕСЂР° Р±С‹Р» Р·Р°РїРёСЃР°РЅ РєР°Рє end(), РЅРѕ РїСЂРѕРёСЃС…РѕРґРёР»Рѕ РІС‹РїР°РґРµРЅРёРµ Р·Р° РїСЂРµРґРµР»С‹ РІРµРєС‚РѕСЂР°
+//	//	// Р’ РёС‚РѕРіРµ Р·Р°РјРµРЅРµРЅРЅРѕ РЅР° begin()+1, СЃРєРѕСЂРµРµ РІСЃРµРіРѕ end()-1 С‚Р°Рє Р¶Рµ СЂР°Р±РѕС‚Р°РµС‚
 //	//	*(this->begin()) = *(this->begin()+1);
 //	//	*(this->begin() + 1) = buffer;
 //	//}
