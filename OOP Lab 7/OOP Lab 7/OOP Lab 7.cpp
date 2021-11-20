@@ -100,7 +100,7 @@ public:
 };
 
 vector<Goods*>v;
-
+// Большая проверка на тип файла
 void bigIF(wstring type, int amount) {
     if(type == L"футболка") { v.push_back(new TShirt(amount, type)); return; }
     if(type == L"бейсболка") { v.push_back(new Cap(amount, type)); return; }
@@ -136,6 +136,7 @@ int main() {
         inside.insert(v[i]->GetAmount()); // Положили в set количество товара
         list.emplace(inside, v[i]->GetName()); // Создаем элемент контейнера multimap
     }
+    // Вывод mutimap
     for(multimap<set<int>, wstring>::iterator i = list.begin(); i != list.end(); ++i) {
         wcout << i->second << ": ";
         auto num = (i->first);
