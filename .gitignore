@@ -6,3 +6,5 @@
 *.obj
 *.db-wal
 *.db-wal
+.vs/
+CMakeSettings.json
