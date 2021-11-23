@@ -1,6 +1,11 @@
 ﻿// pr35exe.cpp : Defines the entry point for the application.
 #include "framework.h"
 #include "pr35exe.h"
+
+struct Leaks {
+    ~Leaks() { _CrtDumpMemoryLeaks(); }
+} _leak;
+
 #define MAX_LOADSTRING 100
 // Global Variables:
 HINSTANCE hInst;                                // current instance
@@ -148,6 +153,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     case WM_DESTROY:
         PostQuitMessage(0);
+
+        for(int i = 0; i < v.size(); i++) {
+            delete v[i];
+        }
+        v.clear();
+
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
