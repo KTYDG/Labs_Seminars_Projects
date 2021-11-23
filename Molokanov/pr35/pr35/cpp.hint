@@ -1,0 +1,2 @@
+﻿#define PR35_API __declspec(dllexport)
+#define PR35_API __declspec(dllimport)
