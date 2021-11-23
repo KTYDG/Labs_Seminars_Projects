@@ -9,7 +9,7 @@ Derived::Derived() {
 
 string Derived::Get(int i) {
 	list<string*>::iterator I = l.begin();
-	for(j = 0; i < i; i++) {
+	for(int j = 0; i < i; i++) {
 		++I;
 	}
 	return **I;

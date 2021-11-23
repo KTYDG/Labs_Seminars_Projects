@@ -4,6 +4,6 @@
 
 Base::Base() { a = new string("Base"); }
 
-string Base::Get() { return *a; }
+string Base::Get(int i) { return *a; }
 
 Base::~Base() { delete a; }

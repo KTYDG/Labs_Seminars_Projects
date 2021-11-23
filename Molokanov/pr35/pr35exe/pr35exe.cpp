@@ -102,6 +102,9 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_COMMAND  - process the application menu
 //  WM_PAINT    - Paint the main window
 //  WM_DESTROY  - post a quit message and return
+
+vector<Base*>v;
+
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
     switch (message)
@@ -123,11 +126,16 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             }
         }
         break;
+    case WM_CREATE:
+        v.push_back(new Derived);
+        v.push_back(new Base);
+        break;
     case WM_PAINT:
         {
             PAINTSTRUCT ps;
-            HDC hdc = BeginPaint(hWnd, &ps);
-            // TODO: Add any drawing code that uses hdc here...
+            HDC hdc;
+            hdc = BeginPaint(hWnd, &ps);
+            //TextOut(hdc, 50, 50, v[1]->Get(1));
             EndPaint(hWnd, &ps);
         }
         break;
