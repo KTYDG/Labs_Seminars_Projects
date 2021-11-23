@@ -107,6 +107,8 @@ vector<Base*>v;
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
+    PAINTSTRUCT ps;
+    HDC hdc;
     switch (message)
     {
     case WM_COMMAND:
@@ -127,15 +129,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_CREATE:
-        v.push_back(new Derived);
         v.push_back(new Base);
+        v.push_back(new Derived);
+        v.push_back(new Derived);
         break;
     case WM_PAINT:
         {
-            PAINTSTRUCT ps;
-            HDC hdc;
+            int TextX = 100, TextY = 100;
+
             hdc = BeginPaint(hWnd, &ps);
-            //TextOut(hdc, 50, 50, v[1]->Get(1));
+
+            for(int i = 0; i < v.size(); i++) {
+                v[i]->StringOut(hdc, TextX, TextY);
+            }
+
             EndPaint(hWnd, &ps);
         }
         break;

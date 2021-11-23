@@ -4,6 +4,9 @@
 
 Base::Base() { a = new string("Base"); }
 
-string Base::Get(int i) { return *a; }
+void Base::StringOut(HDC hdc, int& x, int& y) {
+	TextOutA(hdc, x, y, a->c_str(), a->size());
+	y += 15;
+}
 
 Base::~Base() { delete a; }

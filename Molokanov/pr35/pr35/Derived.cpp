@@ -7,12 +7,15 @@ Derived::Derived() {
 	l.push_back(new string("Derived_3"));
 }
 
-string Derived::Get(int i) {
-	list<string*>::iterator I = l.begin();
-	for(int j = 0; i < i; i++) {
-		++I;
+void Derived::StringOut(HDC hdc, int &x, int &y) {
+	for(list<string*>::iterator i = l.begin(); i != l.end(); ++i) {
+		TextOutA(hdc, x, y, (*i)->c_str(), (*i)->size());
+		y += 15;
 	}
-	return **I;
+
+	//for(int j = 0; j < i; i++) {
+	//	I++;
+	//}
 }
 
 Derived::~Derived() {
