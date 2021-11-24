@@ -109,6 +109,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  WM_DESTROY  - post a quit message and return
 
 vector<Base*>v;
+vector<Base*>v2(v);
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -134,8 +135,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_CREATE:
-        v.push_back(new Base);
         v.push_back(new Derived);
+        v.push_back(new Base);
         v.push_back(new Derived);
         break;
     case WM_PAINT:
@@ -143,9 +144,34 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             int TextX = 100, TextY = 100;
 
             hdc = BeginPaint(hWnd, &ps);
-
-            for(int i = 0; i < v.size(); i++) {
+            // Прозрачный фон текста
+            SetBkMode(hdc, TRANSPARENT);
+            // Выводим текст первого вектора
+            for(int i = 0; unsigned(i) < v.size(); i++) {
                 v[i]->StringOut(hdc, TextX, TextY);
+            }
+            // Копируем первый вектор во второй
+            for(int i = 0; unsigned(i) < v.size(); i++) {
+               v[i]->Copy(v2);
+            }
+            // Делаем заливку фона черным, меняем цвет текста на белый
+            // Чтоб отличить вывод второго, скопированного вектора
+            SetBkMode(hdc, OPAQUE);
+            SetTextColor(hdc, RGB(255, 255, 255));
+            SetBkColor(hdc, RGB(0, 0, 0));
+            TextX += 150; TextY = 100;
+            for(int i = 0; unsigned(i) < v.size(); i++) {
+                v2[i]->StringOut(hdc, TextX, TextY);
+            }
+
+            // Удаление первого вектора, для провеки на правильное копирование
+            for(int i = 0; unsigned(i) < v.size(); i++) {
+                delete v[i];
+            }
+            // Повторный вывод после удаления
+            TextY += 30;
+            for(int i = 0; unsigned(i) < v.size(); i++) {
+                v2[i]->StringOut(hdc, TextX, TextY);
             }
 
             EndPaint(hWnd, &ps);
@@ -154,10 +180,12 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
         PostQuitMessage(0);
 
-        for(int i = 0; i < v.size(); i++) {
-            delete v[i];
+        // Удаляем второй вектор, чтобы не было утечек
+        for(int i = 0; unsigned(i) < v2.size(); i++) {
+            delete v2[i];
         }
         v.clear();
+        v2.clear();
 
         break;
     default:

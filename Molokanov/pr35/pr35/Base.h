@@ -7,12 +7,14 @@
 #include "pch.h"
 
 class PR35 Base {
-public:
+private:
 	string* a;
-
+public:
 	Base();
+	Base(const Base& clone);
 
 	virtual void StringOut(HDC hdc, int& x, int& y);
+	virtual void Copy(vector<Base*>&v);
 
 	virtual ~Base();
 };
