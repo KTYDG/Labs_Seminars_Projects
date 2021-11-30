@@ -4,6 +4,6 @@
 
 class PR36 DB: public list<Shape*>{
 public:
-
+	void Parser();
 };
 
