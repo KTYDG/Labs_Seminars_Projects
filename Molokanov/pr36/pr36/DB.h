@@ -1,9 +1,17 @@
 #pragma once
-#include "Shape.h"
 #include "pch.h"
+#include "Small.h"
+#include "Big.h"
+//#include "Mapper.h"
 
-class PR36 DB: public list<Shape*>{
+class PR36 DB {
+private:
+	//map<string, Mapper*>token;
 public:
-	void Parser();
-};
+	DB();
 
+	//void Parser();
+	//void Tokens();
+
+	~DB();
+};

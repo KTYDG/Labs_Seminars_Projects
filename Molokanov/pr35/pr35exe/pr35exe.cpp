@@ -150,29 +150,29 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
             for(int i = 0; unsigned(i) < v.size(); i++) {
                 v[i]->StringOut(hdc, TextX, TextY);
             }
-            // Копируем первый вектор во второй
-            for(int i = 0; unsigned(i) < v.size(); i++) {
-               v[i]->Copy(v2);
-            }
-            // Делаем заливку фона черным, меняем цвет текста на белый
-            // Чтоб отличить вывод второго, скопированного вектора
-            SetBkMode(hdc, OPAQUE);
-            SetTextColor(hdc, RGB(255, 255, 255));
-            SetBkColor(hdc, RGB(0, 0, 0));
-            TextX += 150; TextY = 100;
-            for(int i = 0; unsigned(i) < v.size(); i++) {
-                v2[i]->StringOut(hdc, TextX, TextY);
-            }
+            //// Копируем первый вектор во второй
+            //for(int i = 0; unsigned(i) < v.size(); i++) {
+            //   v[i]->Copy(v2);
+            //}
+            //// Делаем заливку фона черным, меняем цвет текста на белый
+            //// Чтоб отличить вывод второго, скопированного вектора
+            //SetBkMode(hdc, OPAQUE);
+            //SetTextColor(hdc, RGB(255, 255, 255));
+            //SetBkColor(hdc, RGB(0, 0, 0));
+            //TextX += 150; TextY = 100;
+            //for(int i = 0; unsigned(i) < v.size(); i++) {
+            //    v2[i]->StringOut(hdc, TextX, TextY);
+            //}
 
-            // Удаление первого вектора, для провеки на правильное копирование
-            for(int i = 0; unsigned(i) < v.size(); i++) {
-                delete v[i];
-            }
-            // Повторный вывод после удаления
-            TextY += 30;
-            for(int i = 0; unsigned(i) < v.size(); i++) {
-                v2[i]->StringOut(hdc, TextX, TextY);
-            }
+            //// Удаление первого вектора, для провеки на правильное копирование
+            //for(int i = 0; unsigned(i) < v.size(); i++) {
+            //    delete v[i];
+            //}
+            //// Повторный вывод после удаления
+            //TextY += 30;
+            //for(int i = 0; unsigned(i) < v.size(); i++) {
+            //    v2[i]->StringOut(hdc, TextX, TextY);
+            //}
 
             EndPaint(hWnd, &ps);
         }

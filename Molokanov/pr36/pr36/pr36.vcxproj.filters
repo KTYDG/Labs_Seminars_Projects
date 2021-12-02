@@ -38,15 +38,15 @@
     <ClInclude Include="DB.h">
       <Filter>DataBase\.h</Filter>
     </ClInclude>
+    <ClInclude Include="Mapper.h">
+      <Filter>DataBase\.h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DB.cpp">
       <Filter>DataBase</Filter>
     </ClCompile>
     <ClCompile Include="Big.cpp">
-      <Filter>Shapes</Filter>
-    </ClCompile>
-    <ClCompile Include="Shape.cpp">
       <Filter>Shapes</Filter>
     </ClCompile>
     <ClCompile Include="Small.cpp">
@@ -56,5 +56,8 @@
       <Filter>Header Files</Filter>
     </ClCompile>
     <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Mapper.cpp">
+      <Filter>DataBase</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -5,12 +5,11 @@
 #else
 #define PR36 __declspec(dllimport)
 #endif
-
 #include "pch.h"
 
 class PR36 Shape {
 public:
-	list< pair<int*, int*>>figure;
+	list<pair<int*,int*>> figure;
 	virtual ~Shape() = default;
 };
 
