@@ -8,5 +8,7 @@
 #define PCH_H
 
 // add headers that you want to pre-compile here
+#include <locale>
+#include <codecvt>
 
 #endif //PCH_H

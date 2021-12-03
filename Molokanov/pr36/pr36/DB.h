@@ -5,13 +5,17 @@
 //#include "Mapper.h"
 
 class PR36 DB {
-private:
-	//map<string, Mapper*>token;
 public:
-	DB();
+	list<Shape*>l;
+	map<string, int>token; //Mapper*>token;
 
-	//void Parser();
-	//void Tokens();
+	DB();
+	DB(const DB& cl);
+
+	void Parser();
+	void Tokens();
+	void Out();
+	DB& operator=(const DB& cl);
 
 	~DB();
 };

@@ -9,8 +9,8 @@
 class PR35 Base {
 private:
 	string* a;
-	
-public:list<pair<string, string>>d;
+	list<pair<string, string>>d;
+public:
 	Base();
 	Base(const Base& clone);
 
