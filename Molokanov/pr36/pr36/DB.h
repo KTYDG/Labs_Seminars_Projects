@@ -7,13 +7,13 @@
 class PR36 DB {
 public:
 	list<Shape*>l;
-	map<string, int>token; //Mapper*>token;
+	static map<string, int>token; //Mapper*>token;
 
 	DB();
 	DB(const DB& cl);
 
 	void Parser();
-	void Tokens();
+	//void Tokens();
 	void Out();
 	DB& operator=(const DB& cl);
 

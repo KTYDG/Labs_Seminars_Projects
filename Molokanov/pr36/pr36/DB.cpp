@@ -1,7 +1,16 @@
 #include "pch.h"
 #include "DB.h"
 
-DB::DB() {Tokens();}
+map<string, int>DB::token = {
+	{"SC", 2},
+	{"SP", 3},
+	{"LT", 4},
+	{"VS", 5},
+	{"PU", 6},
+	{"PA", 8},
+};
+
+DB::DB() {/*Tokens()*/ }
 DB::DB(const DB& cl) {
 	for(list<Shape*>::const_iterator i = cl.l.begin(); i != cl.l.end(); ++i) {
 		(*i)->Clone(l);
@@ -90,16 +99,16 @@ void DB::Parser() {
 	}
 	cout << "Работа плоттера завершена\n\n";
 }
-void DB::Tokens() {
-	//token["IN"] = 1;// new Initialize();
-	token["SC"] = 2;//new Scale();
-	token["SP"] = 3;//new SelectPen();
-	token["LT"] = 4;//new LineType();
-	token["VS"] = 5;//new VelocitySelect();
-	token["PU"] = 6;//new PenUp();
-	//token["PD"] = 7;//new PenDown();
-	token["PA"] = 8;//new PlotAbsolute();
-}
+//void DB::Tokens() {
+//	//token["IN"] = 1;// new Initialize();
+//	token["SC"] = 2;//new Scale();
+//	token["SP"] = 3;//new SelectPen();
+//	token["LT"] = 4;//new LineType();
+//	token["VS"] = 5;//new VelocitySelect();
+//	token["PU"] = 6;//new PenUp();
+//	//token["PD"] = 7;//new PenDown();
+//	token["PA"] = 8;//new PlotAbsolute();
+//}
 void DB::Out() {
 	for(list<Shape*>::iterator i = l.begin(); i != l.end(); ++i) {
 		(*i)->Print();

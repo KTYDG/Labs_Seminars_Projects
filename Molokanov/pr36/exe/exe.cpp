@@ -1,13 +1,6 @@
 ﻿#include "pch.h"
 #include "..\pr36\DB.h"
 
-struct Leaks {
-    ~Leaks() { _CrtDumpMemoryLeaks(); }
-} _leak;
-
-// Создать статичные токены
-//DB dbTOKENS("TOKEN");
-
 int main() {
     locale::global(locale("ru_RU.UTF-8"));
     setlocale(LC_ALL, "Rus");
