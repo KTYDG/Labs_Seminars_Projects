@@ -173,7 +173,7 @@ int main() {
 	sw::Stopwatch my_watch1;
 	my_watch1.start();
 	/// Рабочий(да) мусор
-	parallel_for_each((size_t)0, (size_t)N, 
+	parallel_for((size_t)0, (size_t)N,
 		[&](size_t i) {
 			mp1 = 1;
 			for(size_t j = 0; j < M; j++) {

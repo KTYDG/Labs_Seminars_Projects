@@ -4,6 +4,7 @@
 #include "Big.h"
 //#include "Mapper.h"
 
+
 class PR36 DB {
 public:
 	list<Shape*>l;
@@ -19,3 +20,4 @@ public:
 
 	~DB();
 };
+

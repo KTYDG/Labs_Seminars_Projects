@@ -1,5 +1,10 @@
 #include "pch.h"
 #include "DB.h"
+// Проверка на утечки
+struct PR36 Leaks {
+	~Leaks() { _CrtDumpMemoryLeaks(); }
+} _leak;
+
 
 map<string, int>DB::token = {
 	{"SC", 2},
