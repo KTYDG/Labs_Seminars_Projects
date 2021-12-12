@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{b7a6eff2-a5f1-4e86-b847-52cab3171893}</ProjectGuid>
-    <RootNamespace>PSVULab3</RootNamespace>
+    <ProjectGuid>{7b5163ca-1961-40db-a690-8f4610f43515}</ProjectGuid>
+    <RootNamespace>OOPLab6</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -139,7 +139,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="PSVU Lab 3.cpp" />
+    <ClCompile Include="OOP Lab 6.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
