@@ -1,10 +1,14 @@
 #define _USE_MATH_DEFINES
+#define _CRT_SECURE_NO_WARNINGS
+#include<windows.h>
 #include <cmath>
 #include <glut.h>
+#include <iostream>
 int i = 0;
 float x = 0.1, z = 0.1;
 GLfloat x1, z1, yRotate, xRotate = 15, X, Z;
 GLfloat RHand = 0.3, pi = -M_PI / 4, cX, cY, xR = M_PI / 10 * 180 / M_PI;
+GLuint groundTex;
 bool state = true;
 
 float body_dif[] = { 0.3f, 0.3f, 0.3f };
@@ -21,6 +25,42 @@ float body_leg_dif[] = { 0.95f, 0.95f, 0.95f };
 float body_leg_amb[] = { 0.85f, 0.85f, 0.85f };
 //float body_leg_spec[] = { 0.6f, 0.6f, 0.6f };
 float body_leg_shininess = 0.5f * 128;
+
+GLuint LoadTexture(const char* filename) {//Функция считывания текстуры из файла
+    GLuint texture;
+    int width, height;
+    unsigned char* data;
+    FILE* file;
+    file = fopen(filename, "rb");
+    if(file == NULL) return 0; //Не считывать несуществующий файл
+    width = 1000; //Размер изображения в пикселях
+    height = 1000;
+    data = (unsigned char*)malloc(width * height * 3);
+    fread(data, width * height * 3, 1, file);
+    fclose(file);
+
+    for(int i = 0; i < width * height; ++i) {
+        int index = i * 3;
+        unsigned char B, R;
+        B = data[index];
+        R = data[index + 2];
+
+        data[index] = R;
+        data[index + 2] = B;
+    }
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_NEAREST);
+
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+    gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
+    free(data);
+
+    return texture;
+}
 
 void init(void)
 {
@@ -51,10 +91,11 @@ void Draw()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+    glOrtho(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 
-    glTranslatef( 0.0, 0.0, 0.37);
-    
+    glScalef(1.4, 1.4, 1.4);
+    glTranslatef( 0.0, 0.0, 0.5);
+    glRotatef(15, 1.0, 0.0, 0.0);
     glRotatef(yRotate, 0.0, 1.0, 0.0);
     
 
@@ -142,7 +183,7 @@ void Draw()
 
     glTranslatef(-0.08, 0.29, 0.0);
     glPushMatrix();
-    glTranslatef(-cX, cY, 0.0); // правая рука
+    glTranslatef(-cX, cY, 0.0); // левая рука
     glRotatef(-xR, 0.0, 0.0, 1.0);
     glScalef(0.1, 0.9, 0.3);
     glutSolidSphere(RHand, 64, 64);
@@ -174,6 +215,38 @@ void Draw()
     glTranslatef(0.1, 0.5, 0.12); // правый глаз
     glScalef(0.1, 0.1, 0.1);
     glutSolidSphere(0.2, 200, 200);
+    glPopMatrix();
+
+
+    glPushMatrix();
+    if(groundTex == 0)
+        groundTex = LoadTexture("54.bmp");
+    glEnable(GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, groundTex);
+    glEnable(GL_POLYGON_OFFSET_FILL);
+    //glColor3f(1.0f, 1.0f, 1.0f);
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    glBegin(GL_QUADS);
+
+    glNormal3f(0.0f, -4.0f, 0.0f);
+    glColor3f(1.0, 1.0, 1.0);
+
+    glTexCoord2f(1.0f, 0.0f);
+    glVertex3f(-1, -0.52, -1);
+
+    glTexCoord2f(0.0f, 0.0f);
+    glVertex3f(1, - 0.52, -1);
+
+    glTexCoord2f(0.0f, 1.0f);
+    glVertex3f(1, - 0.52, 1);
+
+    glTexCoord2f(1.0f, 1.0f);
+    glVertex3f(-1, - 0.52, 1);
+
+    glEnd();
+    glDisable(GL_POLYGON_OFFSET_FILL);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    glDisable(GL_TEXTURE_2D);
     glPopMatrix();
 
     glFlush();
@@ -210,14 +283,18 @@ void reshape(int x, int y) {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
                                                             // Угол обзора: 40 градусов     
-    gluPerspective(40.0, (GLdouble)x / (GLdouble)y, 0.5, 20.0);	// Возле плоскости отсечения расстояние: 0,5     
+    gluPerspective(60.0, (GLdouble)x / (GLdouble)y, 1, 100.0);	// Возле плоскости отсечения расстояние: 0,5     
                                                                 // Дальний отсечения плоскости расстояние: 20,0     
     glMatrixMode(GL_MODELVIEW);
     glViewport(0, 0, x, y);  // Использование всего окна для rendering 
+    //gluLookAt(
+    //    -1.0f, 0.0f, 0.0f, /* положение камеры */
+    //    0.0f, 0.0f, 0.0f, /* центр сцены */
+    //    0.0f, 0.0f, 0.0f); /* положительное направление оси y */
 }
 
 void idleFunc(void) {     
-	yRotate -= 0.8;   
+	yRotate += 0.8;   
     GLfloat AmbientLightPosition[] = { 150.0 + X, 100.0, 300.0 + Z, 0.0 };
     glLightfv(GL_LIGHT0, GL_POSITION, AmbientLightPosition);
     switch(state) {
