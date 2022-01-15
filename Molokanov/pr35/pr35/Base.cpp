@@ -3,8 +3,8 @@
 
 
 Base::Base() { 
-	d.emplace_back("Работай", "блэт");
-	/*a = new string("Base");*/ 
+	//d.emplace_back("Работай", "блэт");
+	a = new string("Base");
 }
 Base::Base(const Base& clone) { a = new string(*clone.a); }
 

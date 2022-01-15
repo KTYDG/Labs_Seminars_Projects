@@ -7,10 +7,10 @@ struct PR36 Leaks {
 
 
 map<string, int>DB::token = {
-	{"SC", 2},
-	{"SP", 3},
-	{"LT", 4},
-	{"VS", 5},
+	//{"SC", 2},
+	//{"SP", 3},
+	//{"LT", 4},
+	//{"VS", 5},
 	{"PU", 6},
 	{"PA", 8},
 };
@@ -51,22 +51,22 @@ void DB::Parser() {
 
 			c = token[task];
 			switch(c) {
-			case 1:
-				//cout << "Plotter initialized" << endl;
-				break;
-			case 2:
-				cout << "Scale is set" << endl;
-				break;
-			case 3:
-				if(line == "") cout << "Pen deselected" << endl;
-				else cout << "Pen " << line << " selected" << endl;
-				break;
-			case 4:
-				cout << "Line type is set" << endl;
-				break;
-			case 5:
-				cout << "Speed " << line << " is set" << endl;
-				break;
+			//case 1:
+			//	//cout << "Plotter initialized" << endl;
+			//	break;
+			//case 2:
+			//	cout << "Scale is set" << endl;
+			//	break;
+			//case 3:
+			//	if(line == "") cout << "Pen deselected" << endl;
+			//	else cout << "Pen " << line << " selected" << endl;
+			//	break;
+			//case 4:
+			//	cout << "Line type is set" << endl;
+			//	break;
+			//case 5:
+			//	cout << "Speed " << line << " is set" << endl;
+			//	break;
 			case 6:
 				if(Points > 0 and Points <= 2) {
 					Shape* s = new Small();
@@ -102,7 +102,7 @@ void DB::Parser() {
 			}
 		}
 	}
-	cout << "Работа плоттера завершена\n\n";
+	//cout << "Работа плоттера завершена\n\n";
 }
 //void DB::Tokens() {
 //	//token["IN"] = 1;// new Initialize();
