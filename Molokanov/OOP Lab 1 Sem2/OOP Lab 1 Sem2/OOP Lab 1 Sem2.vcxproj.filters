@@ -25,7 +25,10 @@
       <Filter>PCH</Filter>
     </ClCompile>
     <ClCompile Include="DB.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Resource Files</Filter>
+    </ClCompile>
+    <ClCompile Include="People.cpp">
+      <Filter>Resource Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +36,9 @@
       <Filter>PCH</Filter>
     </ClInclude>
     <ClInclude Include="DB.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="People.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
