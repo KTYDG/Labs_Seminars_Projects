@@ -10,16 +10,20 @@ DB& DB::operator=(const DB& cl) {
 		if(turn == 0) {
 			for(set<Base*, predicate>::const_iterator i = cl.s.begin(); i != cl.s.end(); ++i) {
 				if(amount == cl.count / 2) break;
-				s.insert((*i)->clone());
-				amount++;
+				else if((*i)->who() == 'B') {
+					s.insert((*i)->clone());
+					amount++;
+				}
 			}
 			turn = 1;
 		}
 		else {
 			for(set<Base*, predicate>::const_reverse_iterator i = cl.s.crbegin(); i != cl.s.crend(); ++i) {
 				if(amount == cl.count / 2) break;
-				s.insert((*i)->clone());
-				amount++;
+				else if((*i)->who() == 'D') {
+					s.insert((*i)->clone());
+					amount++;
+				}
 			}
 			turn = 0;
 		}

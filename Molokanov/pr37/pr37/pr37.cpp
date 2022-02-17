@@ -6,16 +6,18 @@ struct Leaks {
 } _leak;
 
 int main() {
+	srand(time(0));
 	DB db1;
+	db1.add(new Derived());
 	db1.add(new Base(100));
 	db1.add(new Base(75));
 	db1.add(new Derived());
 	db1.add(new Base(50));
-	db1.add(new Derived()); // Не будет добавлено!
+	db1.add(new Derived());
 	db1.add(new Base(2));
 	db1.add(new Base(8));
-	db1.add(new Derived()); // Не будет добавлено!
-	db1.add(new Base(8));	// Не будет добавлено!
+	db1.add(new Derived());
+	db1.add(new Derived());
 	cout << "db1:\n";
 	db1.print(); // В скобках выведено чему равно Х, по функции compare()
 

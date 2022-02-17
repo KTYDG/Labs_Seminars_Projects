@@ -3,6 +3,7 @@
 
 class Derived: public Base {
 public:
+	static char D;
 	int* y;
 	Derived();
 	Derived(const Derived& cl);
@@ -11,5 +12,6 @@ public:
 	Derived* clone();
 	int get();
 	int compare();
+	char who();
 };
 

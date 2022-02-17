@@ -5,6 +5,7 @@ using namespace std;
 
 class Base {
 public:
+	static char B;
 	int* x;
 	Base();
 	Base(const Base& cl);
@@ -14,5 +15,6 @@ public:
 	virtual Base* clone();
 	virtual int get();
 	virtual int compare();
+	virtual char who();
 };
 

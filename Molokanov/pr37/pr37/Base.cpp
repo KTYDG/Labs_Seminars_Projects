@@ -1,4 +1,5 @@
 #include "Base.h"
+char Base::B='B';
 
 Base::Base() {
 	x = new int(54);
@@ -26,4 +27,8 @@ int Base::get() {
 
 int Base::compare() {
 	return *x;
+}
+
+char Base::who() {
+	return B;
 }

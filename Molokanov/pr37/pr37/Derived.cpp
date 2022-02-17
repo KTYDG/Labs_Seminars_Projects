@@ -1,11 +1,13 @@
-
 #include "Derived.h"
+char Derived::D = 'D';
 
-Derived::Derived() {
+// Base(rand()%100) позволяет создать случайны X не задавая его в ручную
+Derived::Derived():Base(rand()%100) {
 	y = new int(25);
 }
 
-Derived::Derived(const Derived& cl)/*:Base(cl)*/ {
+// Base(cl) позволяет скопировать нормально X и добавить его в новую db
+Derived::Derived(const Derived& cl):Base(cl) {
 	y = new int(*cl.y);
 }
 
@@ -26,4 +28,8 @@ int Derived::get() {
 // От конструктора по умолчанию базовго класса
 int Derived::compare() {
 	return *x;
+}
+
+char Derived::who() {
+	return D;
 }
