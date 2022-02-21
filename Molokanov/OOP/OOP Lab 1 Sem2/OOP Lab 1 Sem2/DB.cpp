@@ -1,4 +1,4 @@
-#include "pch.h"
+ï»¿#include "pch.h"
 #include "DB.h"
 
 DB::DB() {
@@ -10,7 +10,7 @@ DB::DB() {
 	input.open("People.txt"); 
 	input.imbue(utf8_locale);
 	if(!input) {
-		cout << "Íå óäàëîñü îòêðûòü ôàéë" << endl;
+		cout << "ÐÐµ ÑƒÐ´Ð°Ð»Ð¾ÑÑŒ Ð¾Ñ‚ÐºÑ€Ñ‹Ñ‚ÑŒ Ñ„Ð°Ð¹Ð»" << endl;
 		return;
 	}
 	while(!input.eof()) {
@@ -20,8 +20,8 @@ DB::DB() {
 }
 
 void DB::ShowBase() {
-	wcout << left << setw(16) << L"ÔÈÎ" << " | " << setw(4) << L"Ã.Ð."
-		<< " | " << setw(14) << L"Äîëæíîñòü" << L" | Ãðóïïà " << endl;
+	wcout << left << setw(16) << L"Ð¤Ð˜Ðž" << " | " << setw(4) << L"Ð“.Ð ."
+		<< " | " << setw(14) << L"Ð”Ð¾Ð»Ð¶Ð½Ð¾ÑÑ‚ÑŒ" << L" | Ð“Ñ€ÑƒÐ¿Ð¿Ð° " << endl;
 	cout << setfill('~') << setw(51) << "" << setfill(' ') << endl;
 
 	for(vector<People*>::iterator i = v.begin(); i != v.end(); i++) {
@@ -32,12 +32,12 @@ void DB::ShowBase() {
 void DB::ShowEngineers() {
 	system("cls");
 
-	wcout << left << setw(16) << L"ÔÈÎ" << " | " << setw(4) << L"Ã.Ð."
-		<< " | " << setw(14) << L"Äîëæíîñòü" << L" | Ãðóïïà " << endl;
+	wcout << left << setw(16) << L"Ð¤Ð˜Ðž" << " | " << setw(4) << L"Ð“.Ð ."
+		<< " | " << setw(14) << L"Ð”Ð¾Ð»Ð¶Ð½Ð¾ÑÑ‚ÑŒ" << L" | Ð“Ñ€ÑƒÐ¿Ð¿Ð° " << endl;
 	cout << setfill('~') << setw(51) << "" << setfill(' ') << endl;
 
 	for(vector<People*>::iterator i = v.begin(); i != v.end(); i++) {
-		if(*(*i)->work == L"èíæåíåð") (*i)->Cout();
+		if(*(*i)->work == L"Ð¸Ð½Ð¶ÐµÐ½ÐµÑ€") (*i)->Cout();
 		
 	}
 }
@@ -45,13 +45,13 @@ void DB::ShowEngineers() {
 void DB::ShowExcept() {
 	system("cls");
 
-	wcout << left << setw(16) << L"ÔÈÎ" << " | " << setw(4) << L"Ã.Ð."
-		<< " | " << setw(14) << L"Äîëæíîñòü" << L" | Ãðóïïà " << endl;
+	wcout << left << setw(16) << L"Ð¤Ð˜Ðž" << " | " << setw(4) << L"Ð“.Ð ."
+		<< " | " << setw(14) << L"Ð”Ð¾Ð»Ð¶Ð½Ð¾ÑÑ‚ÑŒ" << L" | Ð“Ñ€ÑƒÐ¿Ð¿Ð° " << endl;
 	cout << setfill('~') << setw(51) << "" << setfill(' ') << endl;
 
 	Sort();
 	for(vector<People*>::iterator i = v.begin(); i != v.end(); i++) {
-		if(!(*(*i)->work == L"ïðåäñåäàòåëü")) (*i)->Cout();
+		if(!(*(*i)->work == L"Ð¿Ñ€ÐµÐ´ÑÐµÐ´Ð°Ñ‚ÐµÐ»ÑŒ")) (*i)->Cout();
 
 	}
 }

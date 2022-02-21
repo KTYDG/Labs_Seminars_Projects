@@ -1,4 +1,4 @@
-#include "pch.h"
+п»ї#include "pch.h"
 #include "People.h"
 
 
@@ -11,8 +11,8 @@ People::People(wstring s) {
 	for(wstring::iterator i = s.begin(); i != s.end(); ++i) {
 		switch(part) {
 		case 0:
-			// ИЗНАЧАЛЬНО ВЕЗДЕ СТОЯЛА ПРОВЕРКА НА ПРОБЕЛ C ПОМОЩЬЮ isspace, НО,
-			// НО русская буква "Р" считается пробелом в этой функции
+			// РР—РќРђР§РђР›Р¬РќРћ Р’Р•Р—Р”Р• РЎРўРћРЇР›Рђ РџР РћР’Р•Р РљРђ РќРђ РџР РћР‘Р•Р› C РџРћРњРћР©Р¬Р® isspace, РќРћ,
+			// РќРћ СЂСѓСЃСЃРєР°СЏ Р±СѓРєРІР° "Р " СЃС‡РёС‚Р°РµС‚СЃСЏ РїСЂРѕР±РµР»РѕРј РІ СЌС‚РѕР№ С„СѓРЅРєС†РёРё
 			if(*i != L' ') {
 				*LastName += *i;
 			}
@@ -48,7 +48,7 @@ People::People(wstring s) {
 			}
 			break;
 		case 4:
-			// isdigit тоже не работает нормально с wstring и считает русскую "а" за число
+			// isdigit С‚РѕР¶Рµ РЅРµ СЂР°Р±РѕС‚Р°РµС‚ РЅРѕСЂРјР°Р»СЊРЅРѕ СЃ wstring Рё СЃС‡РёС‚Р°РµС‚ СЂСѓСЃСЃРєСѓСЋ "Р°" Р·Р° С‡РёСЃР»Рѕ
 			if(*i == L' ') {
 				++i;
 				g += *i;
@@ -61,7 +61,7 @@ People::People(wstring s) {
 
 void People::Cout() {
 	wcout << left << setw(16) << *LastName << " | " << setw(4) << *birth
-		<< " | " << setw(14)  << *work << L" | группа " << *group << endl;
+		<< " | " << setw(14)  << *work << L" | РіСЂСѓРїРїР° " << *group << endl;
 
 }
 
