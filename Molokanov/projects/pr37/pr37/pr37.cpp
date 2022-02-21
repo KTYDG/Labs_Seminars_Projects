@@ -18,6 +18,7 @@ int main() {
 	db1.add(new Base(8));
 	db1.add(new Derived());
 	db1.add(new Derived());
+	db1.add(new Base(8));
 	cout << "db1:\n";
 	db1.print(); // В скобках выведено чему равно Х, по функции compare()
 
