@@ -23,7 +23,14 @@ void OpenFile(list<wstring>&source) {
 		getline(input, s, L'\n');
 		if(!s.empty()) source.push_back(s);
 	}
-	source.sort(compare);
+}
+
+void Print(list<wstring>source) {
+	int i = 1;
+	for(list<wstring>::iterator it = source.begin(); it != source.end(); ++it) {
+		wcout << " " << i << L".\t" << *it << endl;
+		i++;
+	}
 }
 
 struct Leaks {
@@ -36,6 +43,11 @@ int main() {
 	list<wstring>source;
 
 	OpenFile(source);
+	cout << "Original:\n";
+	Print(source);
+	cout << "\nSorted:\n";
+	source.sort(compare);
+	Print(source);
 
 	return 0;
 }
