@@ -10,10 +10,6 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
-#include <string>
-#include <fstream>
-#include <codecvt> // codecvt_utf8
-#include <algorithm> // set_union, sort
 #include <cstring> // memcpy
 using namespace std;
 
