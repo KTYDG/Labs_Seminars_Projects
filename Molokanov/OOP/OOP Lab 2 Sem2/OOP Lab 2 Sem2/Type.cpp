@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Type.h"
 
 Type::Type(const Type& cl) {
@@ -67,6 +67,6 @@ Type* Type::Copy() {
 }
 void Type::Cout() {
 	wcout << L" | " << left << setw(6) << *type << L" | " << setw(4) << *year
-		<< L" | " << setw(24) << *name << L" | " << setw(8) << *page << L" | " <<  endl;
+		<< L" | " << setw(24) << *name << L" | " << setw(8) << *page << L" | " << endl;
 
 }

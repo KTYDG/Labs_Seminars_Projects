@@ -7,7 +7,7 @@ DB::DB() {
 	wstring s = L"";
 
 	wifstream input;
-	input.open("People.txt"); 
+	input.open("People.txt");
 	input.imbue(utf8_locale);
 	if(!input) {
 		cout << "Не удалось открыть файл" << endl;
@@ -38,7 +38,7 @@ void DB::ShowEngineers() {
 
 	for(vector<People*>::iterator i = v.begin(); i != v.end(); i++) {
 		if(*(*i)->work == L"инженер") (*i)->Cout();
-		
+
 	}
 }
 

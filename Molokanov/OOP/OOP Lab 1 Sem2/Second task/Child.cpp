@@ -1,4 +1,4 @@
-#include "pch.h"
+﻿#include "pch.h"
 #include "Child.h"
 
 Child::Child() {
@@ -6,8 +6,7 @@ Child::Child() {
 }
 Child::Child(string x): Parent(x) {}
 Child::Child(const Child& cl) : Parent(cl) {}
-Child::~Child() {
-}
+Child::~Child() {}
 
 void Child::Copy(vector<Parent*>&v) {
 	v.push_back(new Child(*this));
