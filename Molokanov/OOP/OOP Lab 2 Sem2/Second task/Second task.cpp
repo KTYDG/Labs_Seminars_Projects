@@ -1,6 +1,6 @@
 ﻿#include "pch.h"
 #include "MyVector.h"
-#include <map>;
+
 struct Leaks {
 	~Leaks() { _CrtDumpMemoryLeaks(); }
 } leaks;
@@ -32,19 +32,6 @@ int main() {
 
 	v.erase(1, 2);
 	v.output();
-
-
-
-	map<string, int, comp>m;
-	m.emplace("zzacbd", 1);
-	m.emplace("zzabcd", 1);
-	m.emplace("zzbdc", 1);
-	m.emplace("zzbcd", 1);
-
-	for(map<string, int, comp>::iterator i = m.begin(); i != m.end(); ++i) {
-		cout << i->first << "\t" << i->second << endl;
-	}
-
 
 	return 0;
 }
