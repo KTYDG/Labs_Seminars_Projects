@@ -45,7 +45,7 @@ void MyVector::insert(int a, const int i) {
 	count++;
 }
 void MyVector::erase(const int first, const int end) {
-	if(end <= 0 or first <= 0 or end < first) return;
+	if(end <= 0 or first <= 0 or end < first or end > count) return;
 	int* array1 = new int[count - (end - first + 1)];
 	bool flag = true;
 	for(int j = 0; j < count; j++) {
