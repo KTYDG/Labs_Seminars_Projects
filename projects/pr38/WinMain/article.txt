@@ -1,0 +1,9 @@
+Stolz, M. (2002), "The History Of Applied Mathematics And The History Of Society", Synthese, 133 (1): 43-57, doi:10.1023/A:1020823608217
+Von Zur Gathen, J., & Gerhard, J. (2013). Modern computer algebra. Cambridge University Press.
+Geddes, K. O., Czapor, S. R., & Labahn, G. (1992). Algorithms for computer algebra. Springer Science & Business Media.
+Albrecht, R. (2012). Computer algebra: symbolic and algebraic computation (Vol. 4). Springer Science & Business Media.
+Mignotte, M. (2012). Mathematics for computer algebra. Springer Science & Business Media.
+Conte, S. D., & De Boor, C. (2017). Elementary numerical analysis: an algorithmic approach. Society for Industrial and Applied Mathematics.
+Greenspan, D. (2018). Numerical Analysis. CRC Press.
+Linz, P. (2019). Theoretical numerical analysis. Courier Dover Publications.
+Greenberg, John L.; Goodstein, Judith R. (1983-12-23). "Theodore von Kármán and Applied Mathematics in America" Science. 222 (4630): 1300-1304. doi:10.1126/science.222.4630.1300

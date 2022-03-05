@@ -1,6 +1,12 @@
 ﻿#pragma once
 
-class DB {
+#include "Parser.h"
 
+class PR38 DB {
+public:
+	map<wstring, Type*>m;
+
+	DB();
+	~DB();
 };
 
