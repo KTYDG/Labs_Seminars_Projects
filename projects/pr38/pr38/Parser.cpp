@@ -5,6 +5,7 @@
 Type* Parser::parse() {
 	Type* t = new Type();
 	while(*input != '\0') {
+		t->number_add((int)((*input) - '0'));
 		parse_author(t);
 		parse_year(t);
 		parse_title(t);
@@ -37,10 +38,6 @@ void Parser::parse_year(Type* t) {
 		if(iswdigit(*input) && year.size() != 4) {
 			year += *input++;
 		}
-		//else if(year.size() < 4) {
-		//	year = "";
-		//	input++;
-		//}
 		else input++;
 	}
 	/*input++;*/
@@ -51,7 +48,7 @@ void Parser::parse_title(Type* t) {
 	// Первоначальный пропуск до слова
 	while(!isalpha(*input)) { input++; }
 
-	while(*input != L'.' && *input != L',') {
+	while(*input != L'.' && *input != L',' && *input != L'"') {
 		if(iswalpha(*input) or iswspace(*input)) title += *input;
 		input++;
 	}
@@ -80,6 +77,7 @@ void Parser::parse_doi(Type* t) {
 	doi = L"";
 	if(*input == L'\0') {
 		t->doi_add(doi);
+		t->type_add(1);
 		return;
 	}
 	else input++;
@@ -88,4 +86,5 @@ void Parser::parse_doi(Type* t) {
 		doi += *input++;
 	}
 	t->doi_add(doi);
+	t->type_add(2);
 }

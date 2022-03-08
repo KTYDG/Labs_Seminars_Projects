@@ -6,7 +6,7 @@
 #include "WinMain.h"
 #include "..//pr38/DB.h"
 
-#pragma comment (lib, "pr38.lib")
+
 
 #define MAX_LOADSTRING 100
 
