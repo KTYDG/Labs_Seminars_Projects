@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{bb2b7e55-d812-44cb-b95b-11693fb8a51d}</ProjectGuid>
-    <RootNamespace>OOPLab4Sem2</RootNamespace>
+    <ProjectGuid>{1cf17b86-9bd4-499e-a067-d046a6b6d221}</ProjectGuid>
+    <RootNamespace>Proj</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -116,10 +116,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>..\pr38\pr38</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\pr38\x64\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -140,22 +142,24 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="framework.h" />
-    <ClInclude Include="OOP Lab 4 Sem2.h" />
+    <ClInclude Include="Proj.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="OOP Lab 4 Sem2.cpp" />
+    <ClCompile Include="Proj.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="OOP Lab 4 Sem2.rc" />
+    <ResourceCompile Include="Proj.rc" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="OOP Lab 4 Sem2.ico" />
+    <Image Include="Proj.ico" />
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="cpp.hint" />
+    <ProjectReference Include="..\pr38\pr38.vcxproj">
+      <Project>{4b4f53e2-c1a4-4b1c-b0f2-105fa3605351}</Project>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

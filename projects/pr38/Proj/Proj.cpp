@@ -1,8 +1,15 @@
-﻿// OOP Lab 4 Sem2.cpp : Defines the entry point for the application.
+﻿// Proj.cpp : Defines the entry point for the application.
 //
-
+#include <iostream>
+#include <string>
+#include <map>
+#include <locale>
+#include <conio.h>
+using namespace std;
 #include "framework.h"
-#include "OOP Lab 4 Sem2.h"
+#include "Proj.h"
+#include "../pr38/DB.h"
+
 
 #define MAX_LOADSTRING 100
 
@@ -28,7 +35,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 	// Initialize global strings
 	LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
-	LoadStringW(hInstance, IDC_OOPLAB4SEM2, szWindowClass, MAX_LOADSTRING);
+	LoadStringW(hInstance, IDC_PROJ, szWindowClass, MAX_LOADSTRING);
 	MyRegisterClass(hInstance);
 
 	// Perform application initialization:
@@ -36,7 +43,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 		return FALSE;
 	}
 
-	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_OOPLAB4SEM2));
+	HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_PROJ));
 
 	MSG msg;
 
@@ -68,10 +75,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance) {
 	wcex.cbClsExtra = 0;
 	wcex.cbWndExtra = 0;
 	wcex.hInstance = hInstance;
-	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_OOPLAB4SEM2));
+	wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_PROJ));
 	wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
 	wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-	wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_OOPLAB4SEM2);
+	wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_PROJ);
 	wcex.lpszClassName = szWindowClass;
 	wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -104,84 +111,79 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 	return TRUE;
 }
 
+//
+//  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
+//
+//  PURPOSE: Processes messages for the main window.
+//
+//  WM_COMMAND  - process the application menu
+//  WM_PAINT    - Paint the main window
+//  WM_DESTROY  - post a quit message and return
+//
+//
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+	HDC hDeviceContext;
+	PAINTSTRUCT paintStruct;
+	RECT rectPlace;
+	HFONT hFont;
 
+	static PTCHAR text;
+	static int size = 0;
 
-
-class mess {
-public:
-	virtual void command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) = 0;
-};
-class wm_COMMAND: public mess {
-	void command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-		int wmId = LOWORD(wParam);
-		// Parse the menu selections:
-		switch(wmId) {
-			case IDM_ABOUT:
-				DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-				break;
-			case IDM_EXIT:
-				DestroyWindow(hWnd);
-				break;
-			default:
-				DefWindowProc(hWnd, message, wParam, lParam);
-		}
-	};
-	class wm_PAINT: public mess {
-		void command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-			PAINTSTRUCT ps;
-			HDC hdc = BeginPaint(hWnd, &ps);
-			// TODO: Add any drawing code that uses hdc here...
-			EndPaint(hWnd, &ps);
-		}
-	};
-	class wm_DESTROY: public mess {
-		void command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-			PostQuitMessage(0);
-		}
-	};
-
-	//  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
-	//
-	//  PURPOSE: Processes messages for the main window.
-	//
-	//  WM_COMMAND  - process the application menu
-	//  WM_PAINT    - Paint the main window
-	//  WM_DESTROY  - post a quit message and return
-	//
-	LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-		switch(message) {
-			case WM_COMMAND:
-			{
-
-			}
+	switch(message) {
+		case WM_CREATE:
+			text = (PTCHAR)GlobalAlloc(GPTR, 50000 * sizeof(TCHAR));
 			break;
-			case WM_PAINT:
-			{
-			}
+		case WM_PAINT:
+			hDeviceContext = BeginPaint(hWnd, &paintStruct);
+			GetClientRect(hWnd, &rectPlace);
+			SetTextColor(hDeviceContext, NULL);
+			hFont = CreateFont(50, 0, 0, 0, 0, 0, 0, 0,
+							   DEFAULT_CHARSET,
+							   0, 0, 0, VARIABLE_PITCH | FF_DONTCARE, NULL);
+			SelectObject(hDeviceContext, hFont);
+			if(wParam != VK_RETURN)
+				DrawText(hDeviceContext,
+						 (LPCWSTR)text,
+						 size, &rectPlace,
+						 DT_SINGLELINE | DT_CENTER | DT_VCENTER);
+			EndPaint(hWnd, &paintStruct);
 			break;
-			case WM_DESTROY:
-			{
+		case WM_CHAR:
+			switch(wParam) {
+				case VK_RETURN:
+					size = 0;
+					break;
+				default:
+					text[size] = (char)wParam;
+					size++;
+					break;
 			}
+			InvalidateRect(hWnd, NULL, TRUE);
 			break;
-			default:
-				return DefWindowProc(hWnd, message, wParam, lParam);
-		}
-		return 0;
+		case WM_DESTROY:
+			PostQuitMessage(NULL);
+			GlobalFree((HGLOBAL)text);
+			break;
+		default:
+			return DefWindowProc(hWnd, message, wParam, lParam);
 	}
+	return 0;
+}
 
-	// Message handler for about box.
-	INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
-		UNREFERENCED_PARAMETER(lParam);
-		switch(message) {
-			case WM_INITDIALOG:
+// Message handler for about box.
+INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam) {
+	UNREFERENCED_PARAMETER(lParam);
+	switch(message) {
+		case WM_INITDIALOG:
+			return (INT_PTR)TRUE;
+
+		case WM_COMMAND:
+			if(LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL) {
+				EndDialog(hDlg, LOWORD(wParam));
 				return (INT_PTR)TRUE;
-
-			case WM_COMMAND:
-				if(LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL) {
-					EndDialog(hDlg, LOWORD(wParam));
-					return (INT_PTR)TRUE;
-				}
-				break;
-		}
-		return (INT_PTR)FALSE;
+			}
+			break;
 	}
+	return (INT_PTR)FALSE;
+}
