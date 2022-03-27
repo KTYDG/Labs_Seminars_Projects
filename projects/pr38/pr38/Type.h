@@ -1,4 +1,7 @@
-﻿#pragma once
+﻿#pragma 
+#ifdef __cpluplus
+	extern "C" {
+#endif
 
 #ifdef  PR38_EXPORTS
 #define PR38 __declspec(dllexport)  
