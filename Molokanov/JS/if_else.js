@@ -1,11 +1,11 @@
-// let OfficialName = prompt('Какое оф название языка JavaScript?');
+let OfficialName = prompt('Какое оф название языка JavaScript?');
 
-// if(OfficialName == "ECMAScript"){
-//     alert("Верно!");
-// }
-// else{
-//     alert("Не знаешь? ECMAScript!");
-// }
+if(OfficialName == "ECMAScript"){
+    alert("Верно!");
+}
+else{
+    alert("Не знаешь? ECMAScript!");
+}
 ////////////////////////////////////////////////////
 // let value = prompt("Введите число", 0)
 
@@ -23,7 +23,7 @@
 
 // (a + b < 4) ? result = 'Мало' : result = 'Много';
 ////////////////////////////////////////////////////
-let message = (login == 'Сотрудник') ? 'Привет' :
- (login == 'Директор') ? 'Здравствуйте' :
- (login == '') ? 'Нет логина' : 
- '';
+// let message = (login == 'Сотрудник') ? 'Привет' :
+//  (login == 'Директор') ? 'Здравствуйте' :
+//  (login == '') ? 'Нет логина' : 
+//  '';
