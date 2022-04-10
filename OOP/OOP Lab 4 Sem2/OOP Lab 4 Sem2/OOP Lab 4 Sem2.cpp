@@ -105,14 +105,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 }
 
 
-
-
-class MSSG {
+#include <string>
+#include <map>
+class MSSG abstract {
 public:
-	virtual LRESULT command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) = 0;
+	virtual void command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) = 0;
 };
 class COMMAND: public MSSG {
-	LRESULT command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+public:
+	void command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 		int wmId = LOWORD(wParam);
 		// Parse the menu selections:
 		switch(wmId) {
@@ -122,60 +123,34 @@ class COMMAND: public MSSG {
 			case IDM_EXIT:
 				DestroyWindow(hWnd);
 				break;
-			default:
-				return DefWindowProc(hWnd, message, wParam, lParam);
 		}
 	}
 };
 class PAINT: public MSSG {
-	LRESULT command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+public:
+	void command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+		std::string lox = "lox";
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
+		TextOutA(hdc, 50, 50, lox.c_str(), lox.size());
 		// TODO: Add any drawing code that uses hdc here...
 		EndPaint(hWnd, &ps);
 	}
 };
 class DESTROY: public MSSG {
-	LRESULT command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+public:
+	void command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 		PostQuitMessage(0);
 	}
 };
 
-class start {
-
-};
+std::map<int, MSSG*>handler = {{int(WM_COMMAND), new COMMAND},{int(WM_PAINT), new PAINT},{int(WM_DESTROY), new DESTROY}};
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-	while(1) {
-
+	if(handler.count(int(message))) {
+		handler.find(message)->second->command(hWnd, message, wParam, lParam);
 	}
-
-	//if(message == WM_COMMAND) {
-	//	int wmId = LOWORD(wParam);
-	//	// Parse the menu selections:
-	//	switch(wmId) {
-	//		case IDM_ABOUT:
-	//			DialogBox(hInst, MAKEINTRESOURCE(IDD_ABOUTBOX), hWnd, About);
-	//			break;
-	//		case IDM_EXIT:
-	//			DestroyWindow(hWnd);
-	//			break;
-	//		default:
-	//			DefWindowProc(hWnd, message, wParam, lParam);
-	//	}
-	//}
-	//else if(message == WM_PAINT) {
-	//	PAINTSTRUCT ps;
-	//	HDC hdc = BeginPaint(hWnd, &ps);
-	//	// TODO: Add any drawing code that uses hdc here...
-	//	EndPaint(hWnd, &ps);
-	//}
-	//else if(message == WM_DESTROY) {
-	//	PostQuitMessage(0);
-	//}
-	//else {
-	//	return DefWindowProc(hWnd, message, wParam, lParam);
-	//}
+	return DefWindowProc(hWnd, message, wParam, lParam);
 	return 0;
 }
 
