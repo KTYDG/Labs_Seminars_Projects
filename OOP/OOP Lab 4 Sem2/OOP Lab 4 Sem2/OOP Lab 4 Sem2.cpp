@@ -107,11 +107,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 
 
 
-class mess {
+class MSSG {
 public:
 	virtual LRESULT command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) = 0;
 };
-class wm_COMMAND: public mess {
+class COMMAND: public MSSG {
 	LRESULT command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 		int wmId = LOWORD(wParam);
 		// Parse the menu selections:
@@ -127,7 +127,7 @@ class wm_COMMAND: public mess {
 		}
 	}
 };
-class wm_PAINT: public mess {
+class PAINT: public MSSG {
 	LRESULT command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 		PAINTSTRUCT ps;
 		HDC hdc = BeginPaint(hWnd, &ps);
@@ -135,7 +135,7 @@ class wm_PAINT: public mess {
 		EndPaint(hWnd, &ps);
 	}
 };
-class wm_DESTROY: public mess {
+class DESTROY: public MSSG {
 	LRESULT command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
 		PostQuitMessage(0);
 	}
@@ -145,16 +145,10 @@ class start {
 
 };
 
-//  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
-//  PURPOSE: Processes messages for the main window.
-//
-//  WM_COMMAND  - process the application menu
-//  WM_PAINT    - Paint the main window
-//  WM_DESTROY  - post a quit message and return
-//
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+	while(1) {
 
+	}
 
 	//if(message == WM_COMMAND) {
 	//	int wmId = LOWORD(wParam);

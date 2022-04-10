@@ -1,4 +1,5 @@
-﻿
+﻿using System.Runtime.InteropServices;
+
 namespace Forms {
     partial class Form1 {
         /// <summary>
@@ -24,6 +25,10 @@ namespace Forms {
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
+            "Test",
+            "Test2",
+            "Test3"}, -1);
             this.button1=new System.Windows.Forms.Button();
             this.button2=new System.Windows.Forms.Button();
             this.button3=new System.Windows.Forms.Button();
@@ -89,20 +94,15 @@ namespace Forms {
             this.button7.UseVisualStyleBackColor=true;
             // 
             // Source
-            //
+            // 
+            this.Source.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1});
             this.Source.Location=new System.Drawing.Point(12, 47);
             this.Source.Name="Source";
             this.Source.Size=new System.Drawing.Size(776, 709);
             this.Source.TabIndex=7;
             this.Source.UseCompatibleStateImageBehavior=false;
             this.Source.View=System.Windows.Forms.View.Details;
-            Source.Columns.Add("Num", 60, HorizontalAlignment.Left);
-            Source.Columns.Add("Author", 100, HorizontalAlignment.Left);
-            Source.Columns.Add("Title", 100, HorizontalAlignment.Left);
-            Source.Columns.Add("Publisher", 100, HorizontalAlignment.Left);
-            Source.Columns.Add("Year", 45, HorizontalAlignment.Left);
-            Source.Columns.Add("Type", 55, HorizontalAlignment.Left);
-            Source.Columns.Add("Doi", 80, HorizontalAlignment.Left);
             // 
             // Form1
             // 

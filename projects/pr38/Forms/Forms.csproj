@@ -7,7 +7,12 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <StartupObject>Forms.Program</StartupObject>
+    <BaseOutputPath>C:\Users\molok\OneDrive\Документы\GitHub\Labs_Seminars_Projects\projects\pr38\x64\Debug</BaseOutputPath>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\pr38\pr38.vcxproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <Compile Update="Properties\Resources.Designer.cs">
