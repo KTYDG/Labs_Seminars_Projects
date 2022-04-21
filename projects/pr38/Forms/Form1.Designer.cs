@@ -25,6 +25,8 @@ namespace Forms {
         ///  the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
+            DB
+            System.Windows.Forms.DrawListViewColumnHeaderEventArgs drawListView = new System.Windows.Forms.DrawListViewColumnHeaderEventArgs(CreateGraphics(), Bounds, 0, )
             System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Test",
             "Test2",
