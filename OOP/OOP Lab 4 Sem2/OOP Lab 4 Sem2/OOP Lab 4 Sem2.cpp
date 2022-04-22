@@ -107,7 +107,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow) {
 
 #include <string>
 #include <map>
-class MSSG {
+class MSSG abstract {
 public:
 	virtual void command(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) = 0;
 };
@@ -144,13 +144,14 @@ public:
 	}
 };
 
-std::map<int, MSSG*>handler = {{WM_COMMAND, new COMMAND},{WM_PAINT, new PAINT},{WM_DESTROY, new DESTROY}};
+std::map<int, MSSG*>handler = {{int(WM_COMMAND), new COMMAND},{int(WM_PAINT), new PAINT},{int(WM_DESTROY), new DESTROY}};
 
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
-	if(handler.count(message)) {
+	if(handler.count(int(message))) {
 		handler.find(message)->second->command(hWnd, message, wParam, lParam);
 	}
 	return DefWindowProc(hWnd, message, wParam, lParam);
+	return 0;
 }
 
 // Message handler for about box.
