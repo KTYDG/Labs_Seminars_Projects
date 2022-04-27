@@ -33,7 +33,7 @@ namespace DM_DB {
             }
             else if(kurs.Checked) {
                 try {
-                    studGroupBindingSource.Filter="Kurs = '"+value.Text+"'";
+                    studGroupBindingSource.Filter="Kurs = '"+value.Text+"' AND NameGroup = 'ИДБ-20-07' AND Kafedra LIKE '%'"; // Тут проверка множественного фильтра стоит, стереть если не надо
                 }
                 catch {
                     studGroupBindingSource.Filter="Kurs = '-1'";

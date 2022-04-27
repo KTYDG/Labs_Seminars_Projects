@@ -63,7 +63,7 @@ void ErrorLine(vector<double>X, vector<double>Y, vector<double>B, int n) {
 }
 int main() {
 	setlocale(LC_ALL, "Rus");
-	vector<double>X = {1.577,
+	vector<double>X = /*{1.577,
 						1.538,
 						1.333,
 						1.847,
@@ -73,9 +73,20 @@ int main() {
 						1.527,
 						1.632,
 						1.034
+	};*/
+	{8.21,
+		8.26,
+		2.51,
+		2.56,
+		3.38,
+		3.88,
+		5.27,
+		2.66,
+		4.01,
+		8.71
 	};
 
-	vector<double>Y = {2.518,
+	vector<double>Y = /*{2.518,
 						2.390,
 						2.566,
 						1.789,
@@ -85,9 +96,20 @@ int main() {
 						2.136,
 						2.302,
 						3.327
+	};*/
+	{15.21,
+		14.07,
+		4.47,
+		3.83,
+		4.19,
+		7.16,
+		8.42,
+		3.10,
+		8.45,
+		17.80
 	};
 
-	int n = 3;
+	int n = 2;
 	bool b;
 	vector<vector<double>> A(n, vector<double>(n + 1));
 	for(int i = 0; i < n; i++) { // Заполнение матрицы с помощью метода наименьших квадратов
