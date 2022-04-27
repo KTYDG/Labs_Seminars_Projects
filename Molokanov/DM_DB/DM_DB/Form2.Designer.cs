@@ -162,7 +162,7 @@
             this.studGroupBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.studGroupBindingNavigator.Name = "studGroupBindingNavigator";
             this.studGroupBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.studGroupBindingNavigator.Size = new System.Drawing.Size(379, 27);
+            this.studGroupBindingNavigator.Size = new System.Drawing.Size(379, 31);
             this.studGroupBindingNavigator.TabIndex = 6;
             this.studGroupBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -172,7 +172,7 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorCountItem

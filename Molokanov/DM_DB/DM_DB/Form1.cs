@@ -33,5 +33,15 @@ namespace DM_DB {
             Form Exam = new Exam();
             Exam.Show();
         }
+
+        private void button5_Click(object sender, EventArgs e) {
+            Form ITvar1 = new ITvar1();
+            ITvar1.Show();
+        }
+
+        private void button6_Click(object sender, EventArgs e) {
+            Form ITvar3 = new ITvar3();
+            ITvar3.Show();
+        }
     }
 }

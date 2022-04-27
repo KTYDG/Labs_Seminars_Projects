@@ -58,8 +58,8 @@
             this.studentBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.studGroupBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.lecturerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.lecturerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.lecturerBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.first = new System.Windows.Forms.Button();
             this.before = new System.Windows.Forms.Button();
             this.add = new System.Windows.Forms.Button();
@@ -78,8 +78,8 @@
             this.examBindingNavigator.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studentBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studGroupBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lecturerBindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lecturerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lecturerBindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // id_StudentLabel
@@ -206,7 +206,7 @@
             this.examBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.examBindingNavigator.Name = "examBindingNavigator";
             this.examBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.examBindingNavigator.Size = new System.Drawing.Size(404, 27);
+            this.examBindingNavigator.Size = new System.Drawing.Size(404, 31);
             this.examBindingNavigator.TabIndex = 9;
             this.examBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -216,13 +216,13 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorCountItem
             // 
             this.bindingNavigatorCountItem.Name = "bindingNavigatorCountItem";
-            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 24);
+            this.bindingNavigatorCountItem.Size = new System.Drawing.Size(45, 28);
             this.bindingNavigatorCountItem.Text = "of {0}";
             this.bindingNavigatorCountItem.ToolTipText = "Total number of items";
             // 
@@ -232,7 +232,7 @@
             this.bindingNavigatorDeleteItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorDeleteItem.Image")));
             this.bindingNavigatorDeleteItem.Name = "bindingNavigatorDeleteItem";
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorDeleteItem.Text = "Delete";
             // 
             // bindingNavigatorMoveFirstItem
@@ -241,7 +241,7 @@
             this.bindingNavigatorMoveFirstItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveFirstItem.Image")));
             this.bindingNavigatorMoveFirstItem.Name = "bindingNavigatorMoveFirstItem";
             this.bindingNavigatorMoveFirstItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveFirstItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveFirstItem.Text = "Move first";
             // 
             // bindingNavigatorMovePreviousItem
@@ -250,13 +250,13 @@
             this.bindingNavigatorMovePreviousItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMovePreviousItem.Image")));
             this.bindingNavigatorMovePreviousItem.Name = "bindingNavigatorMovePreviousItem";
             this.bindingNavigatorMovePreviousItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMovePreviousItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMovePreviousItem.Text = "Move previous";
             // 
             // bindingNavigatorSeparator
             // 
             this.bindingNavigatorSeparator.Name = "bindingNavigatorSeparator";
-            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorPositionItem
             // 
@@ -271,7 +271,7 @@
             // bindingNavigatorSeparator1
             // 
             this.bindingNavigatorSeparator1.Name = "bindingNavigatorSeparator1";
-            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator1.Size = new System.Drawing.Size(6, 31);
             // 
             // bindingNavigatorMoveNextItem
             // 
@@ -279,7 +279,7 @@
             this.bindingNavigatorMoveNextItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveNextItem.Image")));
             this.bindingNavigatorMoveNextItem.Name = "bindingNavigatorMoveNextItem";
             this.bindingNavigatorMoveNextItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveNextItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveNextItem.Text = "Move next";
             // 
             // bindingNavigatorMoveLastItem
@@ -288,20 +288,20 @@
             this.bindingNavigatorMoveLastItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorMoveLastItem.Image")));
             this.bindingNavigatorMoveLastItem.Name = "bindingNavigatorMoveLastItem";
             this.bindingNavigatorMoveLastItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorMoveLastItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorMoveLastItem.Text = "Move last";
             // 
             // bindingNavigatorSeparator2
             // 
             this.bindingNavigatorSeparator2.Name = "bindingNavigatorSeparator2";
-            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 27);
+            this.bindingNavigatorSeparator2.Size = new System.Drawing.Size(6, 31);
             // 
             // examBindingNavigatorSaveItem
             // 
             this.examBindingNavigatorSaveItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
             this.examBindingNavigatorSaveItem.Image = ((System.Drawing.Image)(resources.GetObject("examBindingNavigatorSaveItem.Image")));
             this.examBindingNavigatorSaveItem.Name = "examBindingNavigatorSaveItem";
-            this.examBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 24);
+            this.examBindingNavigatorSaveItem.Size = new System.Drawing.Size(29, 28);
             this.examBindingNavigatorSaveItem.Text = "Save Data";
             this.examBindingNavigatorSaveItem.Click += new System.EventHandler(this.examBindingNavigatorSaveItem_Click);
             // 
@@ -363,15 +363,15 @@
             this.comboBox2.TabIndex = 16;
             this.comboBox2.ValueMember = "Id_Lect";
             // 
-            // lecturerBindingSource1
-            // 
-            this.lecturerBindingSource1.DataMember = "Lecturer";
-            this.lecturerBindingSource1.DataSource = this.lab_5DataSet;
-            // 
             // lecturerBindingSource
             // 
             this.lecturerBindingSource.DataMember = "Lecturer";
             this.lecturerBindingSource.DataSource = this.lab_5DataSet;
+            // 
+            // lecturerBindingSource1
+            // 
+            this.lecturerBindingSource1.DataMember = "Lecturer";
+            this.lecturerBindingSource1.DataSource = this.lab_5DataSet;
             // 
             // first
             // 
@@ -487,8 +487,8 @@
             this.examBindingNavigator.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studentBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.studGroupBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lecturerBindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lecturerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lecturerBindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

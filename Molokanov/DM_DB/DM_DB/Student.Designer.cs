@@ -193,7 +193,7 @@
             this.studentBindingNavigator.MovePreviousItem = this.bindingNavigatorMovePreviousItem;
             this.studentBindingNavigator.Name = "studentBindingNavigator";
             this.studentBindingNavigator.PositionItem = this.bindingNavigatorPositionItem;
-            this.studentBindingNavigator.Size = new System.Drawing.Size(378, 27);
+            this.studentBindingNavigator.Size = new System.Drawing.Size(378, 31);
             this.studentBindingNavigator.TabIndex = 8;
             this.studentBindingNavigator.Text = "bindingNavigator1";
             // 
@@ -203,7 +203,7 @@
             this.bindingNavigatorAddNewItem.Image = ((System.Drawing.Image)(resources.GetObject("bindingNavigatorAddNewItem.Image")));
             this.bindingNavigatorAddNewItem.Name = "bindingNavigatorAddNewItem";
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
-            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 24);
+            this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(29, 28);
             this.bindingNavigatorAddNewItem.Text = "Add new";
             // 
             // bindingNavigatorCountItem
