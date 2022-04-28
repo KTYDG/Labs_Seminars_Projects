@@ -76,6 +76,12 @@
     <Compile Include="ITvar3.Designer.cs">
       <DependentUpon>ITvar3.cs</DependentUpon>
     </Compile>
+    <Compile Include="ITvar6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ITvar6.Designer.cs">
+      <DependentUpon>ITvar6.cs</DependentUpon>
+    </Compile>
     <Compile Include="Lab_5DataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -115,6 +121,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ITvar3.resx">
       <DependentUpon>ITvar3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ITvar6.resx">
+      <DependentUpon>ITvar6.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Lecturer.resx">
       <DependentUpon>Lecturer.cs</DependentUpon>

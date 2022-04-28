@@ -29,18 +29,18 @@ namespace DM_DB {
 
         private void button1_Click(object sender, EventArgs e) {
             if(group.Checked) {
-                studGroupBindingSource.Filter="NameGroup = '"+value.Text+"'";
+                studGroupBindingSource.Filter = "NameGroup = '" + value.Text + "'";
             }
             else if(kurs.Checked) {
                 try {
-                    studGroupBindingSource.Filter="Kurs = '"+value.Text+"' AND NameGroup = 'ИДБ-20-07' AND Kafedra LIKE '%'"; // Тут проверка множественного фильтра стоит, стереть если не надо
+                    studGroupBindingSource.Filter = "Kurs = '" + value.Text + "' AND NameGroup = 'ИДБ-20-07' AND Kafedra LIKE '%'"; // Тут проверка множественного фильтра стоит, стереть если не надо
                 }
                 catch {
-                    studGroupBindingSource.Filter="Kurs = '-1'";
+                    studGroupBindingSource.Filter = "Kurs = '-1'";
                 }
             }
             else {
-                studGroupBindingSource.Filter="Kafedra = '"+value.Text+"'";
+                studGroupBindingSource.Filter = "Kafedra = '" + value.Text + "'";
             }
         }
     }

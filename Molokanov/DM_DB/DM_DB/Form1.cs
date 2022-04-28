@@ -40,7 +40,7 @@ namespace DM_DB {
         }
 
         private void button6_Click(object sender, EventArgs e) {
-            Form ITvar3 = new ITvar3();
+            Form ITvar3 = new ITvar6();
             ITvar3.Show();
         }
     }
