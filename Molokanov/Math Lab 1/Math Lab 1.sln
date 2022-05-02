@@ -5,6 +5,8 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Math Lab 1", "Math Lab 1\Math Lab 1.vcxproj", "{34DC0BE1-24CE-4BB5-AE38-A3BEF893DC08}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Gauss", "Gauss\Gauss.vcxproj", "{4CA1AF42-4479-4845-A330-96560F6C488F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{34DC0BE1-24CE-4BB5-AE38-A3BEF893DC08}.Release|x64.Build.0 = Release|x64
 		{34DC0BE1-24CE-4BB5-AE38-A3BEF893DC08}.Release|x86.ActiveCfg = Release|Win32
 		{34DC0BE1-24CE-4BB5-AE38-A3BEF893DC08}.Release|x86.Build.0 = Release|Win32
+		{4CA1AF42-4479-4845-A330-96560F6C488F}.Debug|x64.ActiveCfg = Debug|x64
+		{4CA1AF42-4479-4845-A330-96560F6C488F}.Debug|x64.Build.0 = Debug|x64
+		{4CA1AF42-4479-4845-A330-96560F6C488F}.Debug|x86.ActiveCfg = Debug|Win32
+		{4CA1AF42-4479-4845-A330-96560F6C488F}.Debug|x86.Build.0 = Debug|Win32
+		{4CA1AF42-4479-4845-A330-96560F6C488F}.Release|x64.ActiveCfg = Release|x64
+		{4CA1AF42-4479-4845-A330-96560F6C488F}.Release|x64.Build.0 = Release|x64
+		{4CA1AF42-4479-4845-A330-96560F6C488F}.Release|x86.ActiveCfg = Release|Win32
+		{4CA1AF42-4479-4845-A330-96560F6C488F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
