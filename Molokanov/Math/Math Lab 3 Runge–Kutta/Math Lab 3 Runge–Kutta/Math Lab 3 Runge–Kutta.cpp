@@ -43,12 +43,12 @@ void GetX(vector<double>Y) { // Для вывода коэффициентов
 	cout << "Неизвестные:\n";
 	SetColor(Black, Yellow);
 	for(int i = 0; i < Y.size(); i++) {
-		cout << setw(10) << i + 1;
+		cout << setw(12) << i + 1;
 	}
 	SetColor(Black, White);
 	cout << "\n";
 	for(int i = 0; i < Y.size(); i++) {
-		cout << setw(10) << Y[i];
+		cout << setw(12) << Y[i];
 	}
 	cout << "\n";
 }
@@ -59,7 +59,9 @@ void ErrorLine(vector<double>X, vector<double>Y, vector<double>B, int n) {
 		else if(B.size() == 3) error += pow(Y[i] - (B[0] * pow(X[i], 2) + B[1] * X[i] + B[2]), 2);
 
 	}
+	cout.precision(30);
 	cout << "Среднее квадратичное отклонение: " << error / X.size() << "\n";
+	cout.precision(5);
 }
 void CreateMatrix(vector<vector<double>> &A, vector<double>X, vector<double>Y, int n) {
 	bool b;
@@ -142,7 +144,7 @@ int main() {
 	int n = 3;
 	vector<vector<double>> A(n, vector<double>(n + 1));
 	CreateMatrix(A, t, h, n); // Создание матрицы с помощью МНК
-
+	PrintMatrix(A, n);
 	//Прямой ход Гаусса
 	double diag, line, max;
 	for(int i = 0; i < n; i++) {
@@ -155,15 +157,16 @@ int main() {
 		for(int j = 0; j < n + 1; j++) { // Приводим число на диагонали к единице
 			A[i][j] /= diag;
 		}
-		cout << i + 1 << ") К ЕДИНИЦE\n"; PrintMatrix(A, n); // Показываем главаная диагональ пришла к 1
+		//cout << i + 1 << ") К ЕДИНИЦE\n"; PrintMatrix(A, n); // Показываем главаная диагональ пришла к 1
 		for(int it = i + 1; it < n; it++) { // Вычитаем из строк
 			line = A[it][i]; // Запоминаем число строки под главной диагональю
 			for(int j = 0; j < n + 1; j++) {
 				A[it][j] -= line * A[i][j];
 			}
 		}
-		cout << "\n"; PrintMatrix(A, n); // Показываем как занулили строки под текущим столбцом
+		//cout << "\n"; PrintMatrix(A, n); // Показываем как занулили строки под текущим столбцом
 	}
+	PrintMatrix(A, n);
 	// Обратный ход Гаусса
 	vector<double>B(n);
 	for(int i = n - 1; i >= 0; i--) {
@@ -179,14 +182,15 @@ int main() {
 
 	// Решение кв уравнения
 	vector<double>T(2);
-	B[2] -= H;
+	//B[2] -= H;
 	double Di = sqrt(pow(B[1], 2) - 4 * B[0] * B[2]);
 	if(Di < 0) cout << "Нет вещественных корней\n";
 	else {
 		T[0] = (-B[1] - Di) / (2 * B[0]);
 		T[1] = (-B[1] + Di) / (2 * B[0]);
-		cout << "Время всплытия: T[1] = " << T[0] << "; T[2] = " << T[1];
+		cout << "Время всплытия: T[1] = " << T[0] << "; T[2] = " << T[1] << "\n";
 	}
+	cout << "Точка вспылтия L = " << Vs * T[1];
 	cout << "\n\n\n";
 	return 0;
 }
