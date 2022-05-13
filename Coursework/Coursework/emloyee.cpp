@@ -1,6 +1,7 @@
 ﻿#include "emloyee.h"
 int Employee::employee = 0;
 Employee::Employee(wstring empl) {
+	id_employee = new int(employee++);
 	const locale utf8_locale = locale(locale(), new std::codecvt_utf8<wchar_t>());
 	wstring s = L""; // создаем принимающую поток переменную
 	std::wifstream input; // создаем поток
