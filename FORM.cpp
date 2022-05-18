@@ -7,6 +7,6 @@ int main() {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 
-	EXE::FORM form; //WinFormsTest - имя вашего проекта
+	EXE::FORM form;
 	Application::Run(% form);
 }

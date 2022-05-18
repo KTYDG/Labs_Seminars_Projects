@@ -3,7 +3,7 @@
 
 // Сравнивает по названию
 struct comp {
-	bool operator()(Type* x1, Type* x2) {
+	bool operator()(Type *x1, Type *x2) {
 		return x1->GetName() < x2->GetName();
 	}
 } compare;
@@ -29,21 +29,21 @@ Library::Library(int number = 0) {
 	sort(storage.begin(), storage.end(), compare);
 }
 Library::~Library() {
-	for(vector<Type*>::iterator i = storage.begin(); i != storage.end(); i++) {
+	for(vector<Type *>::iterator i = storage.begin(); i != storage.end(); i++) {
 		delete *i;
 	}
 }
 
 // Своя собственная функция set_difference из библы algorithm, работающая через оператор
-Library& Library::operator=(const Library& cl) {
+Library &Library::operator=(const Library &cl) {
 	if(this == &cl) return *this;
-	vector<Type*>temporary; // временный контейнер с элементами, отсутствующими в библе 362
+	vector<Type *>temporary; // временный контейнер с элементами, отсутствующими в библе 362
 
 	// first1 - 112 библа, first2 - 362 библа
-	vector<Type*>::const_iterator first1 = cl.storage.begin();
-	vector<Type*>::const_iterator last1 = cl.storage.end();
-	vector<Type*>::iterator first2 = storage.begin();
-	vector<Type*>::iterator last2 = storage.end();
+	vector<Type *>::const_iterator first1 = cl.storage.begin();
+	vector<Type *>::const_iterator last1 = cl.storage.end();
+	vector<Type *>::iterator first2 = storage.begin();
+	vector<Type *>::iterator last2 = storage.end();
 
 	// Цикл сравнения взят с сайта cplusplus
 	while(first1 != last1 && first2 != last2) {
@@ -53,7 +53,7 @@ Library& Library::operator=(const Library& cl) {
 	}
 
 	// Найденные уникальные элементы кладем в нашу 362 библиотеку
-	for(vector<Type*>::iterator i = temporary.begin(); i != temporary.end(); ++i) {
+	for(vector<Type *>::iterator i = temporary.begin(); i != temporary.end(); ++i) {
 		storage.push_back(*i);
 	}
 
@@ -73,7 +73,7 @@ void Library::ShowBase() {
 		<< setw(7) << "+" << setw(27) << "+" << setw(12) << "+ "
 		<< setfill(' ') << endl;
 
-	for(vector<Type*>::iterator i = storage.begin(); i != storage.end(); i++) {
+	for(vector<Type *>::iterator i = storage.begin(); i != storage.end(); i++) {
 		(*i)->Cout();
 	}
 	cout << endl;

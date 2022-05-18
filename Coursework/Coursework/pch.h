@@ -19,12 +19,16 @@
 #include <algorithm>
 #include <string>
 #include <vector>
+#include <map>
+#include <algorithm>
 #include <codecvt> // codecvt_utf8
 #include <time.h>
 
 using std::wstring;
 using std::vector;
+using std::map;
 using std::locale;
 
 
 #endif //PCH_H
+

@@ -1,50 +1,90 @@
-﻿#include "emloyee.h"
+﻿#include "pch.h"
+#include "emloyee.h"
+
 int Employee::employee = 0;
 Employee::Employee(wstring empl) {
 	id_employee = new int(employee++);
-	const locale utf8_locale = locale(locale(), new std::codecvt_utf8<wchar_t>());
-	wstring s = L""; // создаем принимающую поток переменную
-	std::wifstream input; // создаем поток
-	input.open("Employee.txt");
-	if(!input) {
-		std::cout << "Не удалось открыть файл";
-		return;
-	}
-	input.imbue(utf8_locale);
-	while(!input.eof()) {
-		getline(input, s, L'\n');
-		if(!s.empty()) {
-
+	FirstName = new wstring(L"");
+	MiddleName = new wstring(L"");
+	LastName = new wstring(L"");
+	Department = new wstring(L"");
+	Position = new wstring(L"");
+	Salary = new double(NULL);
+	empl += L" ";
+	wstring word = L"";
+	int part = 0;
+	for(wstring::iterator i = empl.begin(); i != empl.end(); ++i) {
+		switch(part) {
+			case 0:
+				if(*i != L' ') word += *i;
+				else {
+					try { *id_employee = stoi(word); }
+					catch(...) { *id_employee = employee - 1; }
+					word = L"";
+					part++;
+				}
+				break;
+			case 1:
+				if(*i != L' ' or iswalpha(*i)) *LastName += *i;
+				else part++;
+				break;
+			case 2:
+				if(*i != L' ' or iswalpha(*i)) *FirstName += *i;
+				else part++;
+				break;
+			case 3:
+				if(*i != L' ' or iswalpha(*i)) *MiddleName += *i;
+				else part++;
+				break;
+			case 4:
+				if(*i != L' ' or iswalpha(*i)) *Department += *i;
+				else if(*i == L'-') *Department += ' ';
+				else part++;
+				break;
+			case 5:
+				if(*i != L' ' or iswalpha(*i)) *Position += *i;
+				else part++;
+				break;
+			case 6:
+				if(*i != L' ') word += *i;
+				break;
 		}
 	}
+	try { *Salary = stod(word); }
+	catch(...) { *Salary = 0; }
+}
+void Employee::Edit(wstring s, int col) {
+	switch(col) {
+		case 0:
+			*id_employee = stoi(s);
+			break;
+		case 1:
+			*LastName = s;
+			break;
+		case 2:
+			*FirstName = s;
+			break;
+		case 3:
+			*MiddleName = s;
+			break;
+		case 4:
+			*Department = s;
+			break;
+		case 5:
+			*Position = s;
+			break;
+		case 6:
+			*Salary = stod(s);
+			break;
+	}
 }
 
-FIO::FIO(wstring FN, wstring MN, wstring LN) {
-	FirstName = new wstring(FN);
-	MiddleName = new wstring(MN);
-	LastName = new wstring(LN);
-}
-FIO::~FIO() {
+
+Employee::~Employee() {
+	delete id_employee;
 	delete FirstName;
 	delete MiddleName;
 	delete LastName;
-}
-Birthday::Birthday(int D = NULL, int M = NULL, int Y = NULL) {
-	Day = new int(D);
-	Month = new int(M);
-	Year = new int(Y);
-}
-Birthday::~Birthday() {
-	delete Day;
-	delete Month;
-	delete Year;
-}
-StaffingTable::StaffingTable(wstring Dep, wstring Pos, int S) {
-	Department = new wstring(Dep);
-	Position = new wstring(Pos);
-	Salary = new int(S);
-}
-StaffingTable::~StaffingTable() {
 	delete Department;
 	delete Position;
 	delete Salary;

@@ -12,9 +12,6 @@
     <Filter Include="PCH">
       <UniqueIdentifier>{782a871e-93e9-4dc4-82fa-b1209c9a8a49}</UniqueIdentifier>
     </Filter>
-    <Filter Include="First floor">
-      <UniqueIdentifier>{daee4c9a-19d6-46c8-93bf-793fdf0b699a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -40,5 +37,11 @@
     <ClCompile Include="emloyee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Coursework.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Employee.txt" />
   </ItemGroup>
 </Project>
