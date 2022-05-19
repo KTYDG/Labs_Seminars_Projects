@@ -62,7 +62,6 @@ void HR_department::Save() {
 			<< L" " << *elem.second->MiddleName << L" " << *elem.second->Department << L" " << *elem.second->Position
 			<< L" " << *elem.second->Salary << L"\n";
 	}
-	output.close();
 }
 
 // Функция set_difference из библы algorithm, работающая через оператор
