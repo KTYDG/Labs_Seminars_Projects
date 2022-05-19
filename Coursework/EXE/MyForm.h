@@ -39,6 +39,7 @@ private: System::Windows::Forms::Button ^enterRow;
 private: int Cnt, //номер очередной строки
 	EditIndex; //номер редактируемого элемента
 private: TextBox ^textBox1; //текстовое поле
+
 protected:
 
 private:
@@ -292,6 +293,8 @@ private: System::Void dataGridView1_CellBeginEdit(System::Object ^sender, System
 }
 private: System::Void dataGridView1_CellEndEdit(System::Object ^sender, System::Windows::Forms::DataGridViewCellEventArgs ^e) {
 	lastValue = String::Empty;
+	dataGridView1->Rows->Clear();
+	load = false;
 	LoadTable();
 }
 	   /////////////////////////////// Функции кнопок
@@ -300,14 +303,15 @@ private: System::Void deleteRow_Click(System::Object ^sender, System::EventArgs 
 	if(dataGridView1->SelectedRows->Count > 0) {
 		for(int i = dataGridView1->SelectedRows->Count - 1; i >= 0; i--) {
 			int index = dataGridView1->SelectedRows[i]->Index;
-			try {
-				msclr::interop::marshal_context context;
-				int id = stoi(context.marshal_as<std::wstring>(dataGridView1->Rows[index]->Cells[0]->Value->ToString()));
-				delete hr->employees.at(id);
-				hr->employees.erase(id);
-				dataGridView1->Rows->RemoveAt(index);
+			msclr::interop::marshal_context context;
+			if(dataGridView1->Rows[index]->Cells[0]->FormattedValue->ToString() == String::Empty) {
+				MessageBox::Show("Не могу удалить строку с индексом " + index);
+				continue;
 			}
-			catch(...) { MessageBox::Show("Не могу удалить строку с индексом " + index); }
+			int id = stoi(context.marshal_as<std::wstring>(dataGridView1->Rows[index]->Cells[0]->Value->ToString()));
+			delete hr->employees.at(id);
+			hr->employees.erase(id);
+			dataGridView1->Rows->RemoveAt(index);
 		}
 	}
 	else MessageBox::Show("Выберите строки/ячейку для удаления");
@@ -320,13 +324,13 @@ private: System::Void enterRow_Click(System::Object ^sender, System::EventArgs ^
 		wstring text = context.marshal_as<std::wstring>(listBox1->Items[i]->ToString());
 		NewHR->set_diff(text);
 	}
-	hr = NewHR;
+	*hr = *NewHR; // Необходимо разыменовать, иначе не сработает оператор =
 	listBox1->Items->Clear();
-	dataGridView1->Rows->Clear();
 	hr->Save();
+	dataGridView1->Rows->Clear();
+	load = false;
 	LoadTable();
 }
-
 
 };
 }
