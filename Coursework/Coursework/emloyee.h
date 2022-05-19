@@ -11,6 +11,5 @@ public:
 	Employee() = default;
 	Employee(wstring Empl);
 	void Edit(wstring s, int col);
-
 	~Employee();
 };
