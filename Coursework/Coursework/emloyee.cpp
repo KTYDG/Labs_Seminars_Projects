@@ -2,6 +2,7 @@
 #include "emloyee.h"
 
 int Employee::employee = 0;
+
 Employee::Employee(wstring empl) {
 	id_employee = new int(employee++);
 	FirstName = new wstring(L"");
@@ -9,14 +10,14 @@ Employee::Employee(wstring empl) {
 	LastName = new wstring(L"");
 	Department = new wstring(L"");
 	Position = new wstring(L"");
-	Salary = new double(NULL);
+	Salary = new long double(NULL);
 	empl += L" ";
 	wstring word = L"";
 	int part = 0;
-	for(wstring::iterator i = empl.begin(); i != empl.end(); ++i) {
+	for(auto &ch : empl) {
 		switch(part) {
 			case 0:
-				if(*i != L' ') word += *i;
+				if(ch != L' ') word += ch;
 				else {
 					try { *id_employee = stoi(word); }
 					catch(...) { *id_employee = employee - 1; }
@@ -25,38 +26,39 @@ Employee::Employee(wstring empl) {
 				}
 				break;
 			case 1:
-				if(*i != L' ' or iswalpha(*i)) *LastName += *i;
+				if(ch != L' ' or iswalpha(ch)) *LastName += ch;
 				else part++;
 				break;
 			case 2:
-				if(*i != L' ' or iswalpha(*i)) *FirstName += *i;
+				if(ch != L' ' or iswalpha(ch)) *FirstName += ch;
 				else part++;
 				break;
 			case 3:
-				if(*i != L' ' or iswalpha(*i)) *MiddleName += *i;
+				if(ch != L' ' or iswalpha(ch)) *MiddleName += ch;
 				else part++;
 				break;
 			case 4:
-				if(*i != L' ' or iswalpha(*i)) *Department += *i;
-				else if(*i == L'-') *Department += ' ';
+				if(ch == L'-') *Department += ' ';
+				else if(ch != L' ' or iswalpha(ch)) *Department += ch;
 				else part++;
 				break;
 			case 5:
-				if(*i != L' ' or iswalpha(*i)) *Position += *i;
+				if(ch == L'-') *Position += ' ';
+				else if(ch != L' ' or iswalpha(ch)) *Position += ch;
 				else part++;
 				break;
 			case 6:
-				if(*i != L' ') word += *i;
+				if(ch != L' ' && ch != 160) word += ch;
 				break;
 		}
 	}
-	try { *Salary = stod(word); }
+	try { *Salary = stold(word); }
 	catch(...) { *Salary = 0; }
 }
 void Employee::Edit(wstring s, int col) {
 	switch(col) {
 		case 0:
-			*id_employee = stoi(s);
+			*id_employee = abs(stoi(s));
 			break;
 		case 1:
 			*LastName = s;
@@ -74,7 +76,7 @@ void Employee::Edit(wstring s, int col) {
 			*Position = s;
 			break;
 		case 6:
-			*Salary = stod(s);
+			*Salary = stold(s);
 			break;
 	}
 }

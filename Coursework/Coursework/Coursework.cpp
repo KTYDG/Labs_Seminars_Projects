@@ -11,7 +11,7 @@ HR_department::HR_department(wstring st) {
 
 	wstring s = L""; // создаем принимающую поток переменную
 	std::wifstream input; // создаем поток
-	input.open("../Coursework/Employee.txt");
+	input.open("Employee.txt");
 	if(!input) {
 		std::wcout << L"Не удалось открыть файл";
 		return;
@@ -25,21 +25,24 @@ HR_department::HR_department(wstring st) {
 		}
 	}
 }
+
 void HR_department::Add(wstring s, int id, int col, bool &test) {
 	wstring Buffer = L"";
-	if(col < 6 && col> 1) { // Парсим текст
-		for(wstring::iterator i = s.begin(); i != s.end(); ++i) {
-			if(iswalpha(*i)) Buffer += *i;
+	if(col < 6 && col >= 1) { // Парсим текст
+		for(auto &ch : s) {
+			if(iswalpha(ch)) {
+				Buffer += ch;
+			}
 		}
 	}
 	else {	// Парсим цифры
-		for(wstring::iterator i = s.begin(); i != s.end(); ++i) {
-			if(iswdigit(*i)) Buffer += *i;
+		for(auto &ch : s) {
+			if(iswdigit(ch)) Buffer += ch;
 		}
 	}
-	if(s.empty()) { test = true; return; }
-	if(employees.find(id) == employees.end()) employees[id] = new Employee(s);
-	employees[id]->Edit(s, col);
+	if(Buffer.empty()) { test = true; return; }
+	if(employees.find(id) == employees.end()) employees[id] = new Employee(Buffer);
+	employees[id]->Edit(Buffer, col);
 	test = false;
 }
 void HR_department::set_diff(wstring s) {
@@ -51,7 +54,7 @@ void HR_department::set_diff(wstring s) {
 void HR_department::Save() {
 	const locale utf8_locale = locale(locale(), new std::codecvt_utf8<wchar_t>());
 	std::wofstream output;
-	output.open("../Coursework/Employee.txt", std::ios::out | std::ios::trunc);
+	output.open("Employee.txt", std::ios::out | std::ios::trunc);
 	if(!output) {
 		std::wcout << L"Не удалось открыть или создать файл";
 		return;
@@ -59,8 +62,17 @@ void HR_department::Save() {
 	output.imbue(utf8_locale);
 	for(const auto &elem : employees) {
 		output << *elem.second->id_employee << L" " << *elem.second->LastName << L" " << *elem.second->FirstName
-			<< L" " << *elem.second->MiddleName << L" " << *elem.second->Department << L" " << *elem.second->Position
-			<< L" " << *elem.second->Salary << L"\n";
+			<< L" " << *elem.second->MiddleName << L" ";
+		for(auto &ch : *elem.second->Department) {
+			if(ch == L' ') output << "-";
+			else output << ch;
+		}
+		output << L" ";
+		for(auto &ch : *elem.second->Position) {
+			if(ch == L' ') output << "-";
+			else output << ch;
+		}
+		output << L" " << *elem.second->Salary << L"\n";
 	}
 }
 

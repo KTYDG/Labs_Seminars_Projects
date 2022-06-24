@@ -33,7 +33,8 @@ private: System::Windows::Forms::ListBox ^listBox1;
 private: System::Windows::Forms::DataGridView ^dataGridView1;
 private: HR_department *hr = new HR_department(L"Start"); // СОЗДАЛИ КЛАСС БД
 private: bool load = false;
-private: String ^lastValue;
+private: String ^errorMessage = String::Empty;
+private: String ^lastValue = String::Empty;
 private: System::Windows::Forms::Button ^deleteRow;
 private: System::Windows::Forms::Button ^enterRow;
 private: int Cnt, //номер очередной строки
@@ -159,7 +160,7 @@ private:
 		this->MaximizeBox = false;
 		this->MinimizeBox = false;
 		this->Name = L"MyForm";
-		this->Text = L"MyForm";
+		this->Text = L"Data base";
 		this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 		(cli::safe_cast<System::ComponentModel::ISupportInitialize ^>(this->dataGridView1))->EndInit();
 		this->ResumeLayout(false);
@@ -175,10 +176,10 @@ private: void LoadTable() {
 	dataGridView1->Columns[2]->Name = "Имя";
 	dataGridView1->Columns[3]->Name = "Отчество";
 	dataGridView1->Columns[4]->Name = "Отдел";
-	dataGridView1->Columns[4]->Width = 215;
+	dataGridView1->Columns[4]->Width = 105;
 	dataGridView1->Columns[5]->Name = "Должность";
-	dataGridView1->Columns[5]->Width = 122;
-	dataGridView1->Columns[6]->Name = "Зар-та";
+	dataGridView1->Columns[5]->Width = 213;
+	dataGridView1->Columns[6]->Name = "Зарп-та";
 	dataGridView1->Columns[6]->Width = 60;
 	int i = 0;
 	if(hr->employees.size() == NULL) return;
@@ -190,11 +191,18 @@ private: void LoadTable() {
 		dataGridView1->Rows[i]->Cells[3]->Value = gcnew String((elem.second->MiddleName)->c_str());
 		dataGridView1->Rows[i]->Cells[4]->Value = gcnew String((elem.second->Department)->c_str());
 		dataGridView1->Rows[i]->Cells[5]->Value = gcnew String((elem.second->Position)->c_str());
-		dataGridView1->Rows[i]->Cells[6]->Value = gcnew int(*elem.second->Salary);
+		dataGridView1->Rows[i]->Cells[6]->Value = gcnew double(*elem.second->Salary);
 		i++;
 	}
 	dataGridView1->Sort(dataGridView1->Columns[0], ListSortDirection::Ascending);
 	load = true;
+}
+
+private: void Reload() {
+	hr->Save();
+	dataGridView1->Rows->Clear();
+	load = false;
+	LoadTable();
 }
 
 private: System::Void MyForm_Load(System::Object ^sender, System::EventArgs ^e) {
@@ -214,22 +222,29 @@ private: System::Void MyForm_Load(System::Object ^sender, System::EventArgs ^e) 
 	textBox1->LostFocus += gcnew System::EventHandler(this, &MyForm::textBox_LostFocus);
 	this->Controls->Add(textBox1);
 }
+
 	   /////////////////////////////// Функции ListBox
 private: System::Void textBox_LostFocus(System::Object ^sender, System::EventArgs ^e) {
 	listBox1->Items[EditIndex] = textBox1->Text;
 	hideTextEditor();
 	listBox1->SelectedIndex = -1; // При нажатии в пустое место снять фокус
 }
+
 private: System::Void listBox1_DoubleClick(System::Object ^sender, System::EventArgs ^e) { // Дабл клик в листе создает строку
 	CreateEditBox(sender);
 }
+
+	   //private: System::Void listBox1_ButtonClick(System::Object ^sender, System::EventArgs ^e) { // Дабл клик в листе создает строку
+	   //	CreateEditBox(sender);
+	   //}
+
 private: System::Void CreateEditBox(System::Object ^sender) {
 	ListBox ^listBox1 = (ListBox ^)sender;
 	int n = listBox1->SelectedIndex;
 	if(n < 0 || n == -1) {
-		String ^Str = gcnew String("Строка " + ++Cnt);
+		n = listBox1->Items->Count;
+		String ^Str = gcnew String(n + " Фамилия Имя Отчество Отдел Должность Зарплата");
 		listBox1->Items->Add(Str);
-		n = listBox1->Items->Count - 1;
 	}
 	System::Drawing::Rectangle ^r = listBox1->GetItemRectangle(n);
 	String ^itemText = (String ^)listBox1->Items[n];
@@ -237,11 +252,13 @@ private: System::Void CreateEditBox(System::Object ^sender) {
 	textBox1->Location = System::Drawing::Point(listBox1->Location.X + r->X + delta, listBox1->Location.Y + r->Y + delta);
 	textBox1->Size = System::Drawing::Size(r->Width, r->Height - 3);
 	showTextEditor();
-	textBox1->Text = n + " Фамилия Имя Отчество Отдел Должность Зарплата";
+	if(textBox1->Text->ToString() == String::Empty) textBox1->Text = n + " Фамилия Имя Отчество Отдел Должность Зарплата";
+	textBox1->Text = listBox1->Items[n]->ToString();
 	textBox1->Focus();
 	textBox1->SelectAll();
 	EditIndex = n;
 }
+
 private: System::Void showTextEditor(System::Void) {
 	listBox1->SendToBack();
 	textBox1->BringToFront();
@@ -253,20 +270,29 @@ private: System::Void hideTextEditor() {
 	textBox1->SendToBack();
 	listBox1->BringToFront();
 }
+
 	   /////////////////////////////// Функции GridView
 private: System::Void dataGridView1_CellValueChanged(System::Object ^sender, System::Windows::Forms::DataGridViewCellEventArgs ^e) {
 	if(!load) return;
 	if(dataGridView1->Rows[e->RowIndex]->Cells[0]->FormattedValue->ToString() == String::Empty) {
 		dataGridView1->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value = lastValue;
-		dataGridView1->CancelEdit();
-		dataGridView1->ClearSelection();
-		MessageBox::Show("Необходимо задать ID сотрудника");
+		errorMessage = "Необходимо задать ID сотрудника";
+		return;
+	}
+	if(dataGridView1->Rows[e->RowIndex]->Cells[e->ColumnIndex]->FormattedValue->ToString() == String::Empty) {
+		dataGridView1->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value = lastValue;
+		errorMessage = "Нельзя создать пустую строку";
 		return;
 	}
 	msclr::interop::marshal_context context;
 	String ^check = dataGridView1->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value->ToString();
 	std::wstring Val = context.marshal_as<std::wstring>(check);
 	int col = e->ColumnIndex;
+	if(col == 0 && lastValue != String::Empty) {
+		dataGridView1->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value = lastValue;
+		errorMessage = "Нельзя изменить id";
+		return;
+	}
 	int id;
 	try {
 		id = stoi(context.marshal_as<std::wstring>(dataGridView1->Rows[e->RowIndex]->Cells[0]->Value->ToString()));
@@ -279,9 +305,9 @@ private: System::Void dataGridView1_CellValueChanged(System::Object ^sender, Sys
 	hr->Add(Val, id, col, test);
 	if(test) {
 		dataGridView1->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value = lastValue;
-		MessageBox::Show("Неудалось создать строку");
+		errorMessage = "Неудалось создать строку";
+		return;
 	}
-	load = false;
 	hr->Save();
 }
 private: System::Void dataGridView1_CellBeginEdit(System::Object ^sender, System::Windows::Forms::DataGridViewCellCancelEventArgs ^e) {
@@ -291,28 +317,37 @@ private: System::Void dataGridView1_CellBeginEdit(System::Object ^sender, System
 	lastValue = dataGridView1->Rows[e->RowIndex]->Cells[e->ColumnIndex]->Value->ToString();
 }
 private: System::Void dataGridView1_CellEndEdit(System::Object ^sender, System::Windows::Forms::DataGridViewCellEventArgs ^e) {
+	dataGridView1->ClearSelection();
+	if(errorMessage != String::Empty) {
+		dataGridView1->CancelEdit();
+		MessageBox::Show(errorMessage);
+	}
 	lastValue = String::Empty;
-	LoadTable();
+	errorMessage = String::Empty;
 }
 	   /////////////////////////////// Функции кнопок
+
 private: System::Void deleteRow_Click(System::Object ^sender, System::EventArgs ^e) {
-	if(!dataGridView1->RowCount) { MessageBox::Show("В таблице нет строк!"); return; }
+	if(!dataGridView1->RowCount) { MessageBox::Show("В таблице нет строк!"); dataGridView1->ClearSelection(); return; }
 	if(dataGridView1->SelectedRows->Count > 0) {
 		for(int i = dataGridView1->SelectedRows->Count - 1; i >= 0; i--) {
 			int index = dataGridView1->SelectedRows[i]->Index;
-			try {
-				msclr::interop::marshal_context context;
-				int id = stoi(context.marshal_as<std::wstring>(dataGridView1->Rows[index]->Cells[0]->Value->ToString()));
-				delete hr->employees.at(id);
-				hr->employees.erase(id);
-				dataGridView1->Rows->RemoveAt(index);
+			msclr::interop::marshal_context context;
+			if(dataGridView1->Rows[index]->Cells[0]->FormattedValue->ToString() == String::Empty) {
+				MessageBox::Show("Не могу удалить строку с индексом " + index);
+				continue;
 			}
-			catch(...) { MessageBox::Show("Не могу удалить строку с индексом " + index); }
+			int id = stoi(context.marshal_as<std::wstring>(dataGridView1->Rows[index]->Cells[0]->Value->ToString()));
+			delete hr->employees.at(id);
+			hr->employees.erase(id);
+			dataGridView1->Rows->RemoveAt(index);
 		}
 	}
 	else MessageBox::Show("Выберите строки/ячейку для удаления");
 	hr->Save();
+	dataGridView1->ClearSelection();
 }
+
 private: System::Void enterRow_Click(System::Object ^sender, System::EventArgs ^e) {
 	msclr::interop::marshal_context context;
 	HR_department *NewHR = new HR_department();
@@ -320,11 +355,9 @@ private: System::Void enterRow_Click(System::Object ^sender, System::EventArgs ^
 		wstring text = context.marshal_as<std::wstring>(listBox1->Items[i]->ToString());
 		NewHR->set_diff(text);
 	}
-	hr = NewHR;
+	*hr = *NewHR;
 	listBox1->Items->Clear();
-	dataGridView1->Rows->Clear();
-	hr->Save();
-	LoadTable();
+	Reload();
 }
 
 
